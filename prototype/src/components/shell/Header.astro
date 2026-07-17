@@ -1,0 +1,26 @@
+<header class="topbar">
+  <div class="topbar-context" aria-hidden="true"></div>
+  <div class="topbar-actions">
+    <div class="shell-menu">
+      <button class="language-button" id="language-toggle" type="button" aria-label="Change language" aria-haspopup="menu" aria-expanded="false" aria-controls="language-menu">DE</button>
+      <div class="shell-popover language-menu" id="language-menu" role="menu" aria-label="Choose language" hidden>
+        <button type="button" role="menuitemradio" aria-checked="true" data-language="DE">Deutsch</button>
+        <button type="button" role="menuitemradio" aria-checked="false" data-language="EN">English</button>
+        <button type="button" role="menuitemradio" aria-checked="false" data-language="ES">Español</button>
+      </div>
+    </div>
+    <button class="icon-button" id="theme-toggle" type="button" aria-label="Switch to dark theme">◐</button>
+    <div class="shell-menu">
+      <button class="avatar-button" id="account-toggle" type="button" aria-label="Open operator menu" aria-haspopup="menu" aria-expanded="false" aria-controls="account-menu">LK</button>
+      <div class="shell-popover account-menu" id="account-menu" role="menu" aria-label="Operator account" hidden>
+        <div class="account-menu__identity"><strong>Leonie Krüger</strong><span>operator@havenova.de</span></div>
+        <div class="account-menu__items">
+          <button type="button" role="menuitem" disabled>Profile</button>
+          <button type="button" role="menuitem" disabled>Preferences</button>
+          <button type="button" role="menuitem" disabled>Security</button>
+        </div>
+        <button class="account-menu__signout" id="signout-trigger" type="button" role="menuitem">Sign out</button>
+      </div>
+    </div>
+  </div>
+</header>

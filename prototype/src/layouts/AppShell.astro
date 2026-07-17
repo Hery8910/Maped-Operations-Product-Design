@@ -1,0 +1,33 @@
+---
+import '../styles/tokens.css';
+import '../styles/base.css';
+import '../styles/shell.css';
+import '../styles/components.css';
+import '../styles/domains/users.css';
+import Sidebar from '../components/shell/Sidebar.astro';
+import Header from '../components/shell/Header.astro';
+import PrototypeStates from '../components/prototype/PrototypeStates.astro';
+const { title = 'Maped Solutions — Users prototype' } = Astro.props;
+---
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to Users workspace</a>
+    <div class="app-shell">
+      <Sidebar />
+      <div class="workspace-frame">
+        <Header />
+        <main id="main-content" class="main-content"><slot /></main>
+      </div>
+    </div>
+    <PrototypeStates />
+    <script src="../../scripts/theme.js"></script>
+    <script src="../../scripts/shell.js"></script>
+    <script src="../../scripts/demo.js"></script>
+  </body>
+</html>

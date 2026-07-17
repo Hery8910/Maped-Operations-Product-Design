@@ -1,0 +1,14 @@
+---
+import UsersHeader from './UsersHeader.astro';
+import UsersDirectory from './UsersDirectory.astro';
+import UserInspector from './UserInspector.astro';
+import InviteCustomerDialog from './InviteCustomerDialog.astro';
+---
+<div class="content-stage">
+  <UsersHeader />
+  <section class="workspace" aria-label="Users directory and detail">
+    <UsersDirectory />
+    <UserInspector />
+  </section>
+</div>
+<InviteCustomerDialog />

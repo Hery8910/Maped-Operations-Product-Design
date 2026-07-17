@@ -1,0 +1,30 @@
+<section class="directory-panel" aria-labelledby="directory-heading">
+  <div class="directory-toolbar">
+    <div>
+      <h2 id="directory-heading">Directory</h2>
+      <p class="directory-summary">
+        <span class="directory-summary__item"><span id="summary-total">24</span> people</span>
+        <span class="directory-summary__item"><span id="summary-active">18</span> active</span>
+        <span class="directory-summary__item"><span id="summary-attention">3</span> need attention</span>
+      </p>
+      <p class="visually-hidden" id="result-count" aria-live="polite">24 people and invitations</p>
+    </div>
+    <button class="quiet-button" id="refresh-button" type="button">↻ <span>Refresh</span></button>
+  </div>
+
+  <label class="search-control">
+    <span class="visually-hidden">Search people and invitations</span>
+    <span aria-hidden="true">⌕</span>
+    <input id="search-input" type="search" placeholder="Search name or email" autocomplete="off" />
+  </label>
+
+  <div class="filter-row" aria-label="Directory filters">
+    <button class="filter-button active" type="button" data-filter="all">All <span id="filter-all-count">24</span></button>
+    <button class="filter-button" type="button" data-filter="active">Active <span id="filter-active-count">18</span></button>
+    <button class="filter-button" type="button" data-filter="invitations">Invitations <span id="filter-invitation-count">2</span></button>
+    <button class="filter-button" type="button" data-filter="attention">Needs attention <span id="filter-attention-count">3</span></button>
+  </div>
+
+  <div class="directory-state" id="directory-state"></div>
+  <div class="directory-list" id="directory-list" role="list" aria-label="Users and invitations"></div>
+</section>

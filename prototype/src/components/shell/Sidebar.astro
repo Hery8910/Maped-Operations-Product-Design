@@ -1,0 +1,42 @@
+---
+import { navigationGroups, overviewItem } from '../../data/navigation';
+
+const activeDestinationId = 'users';
+---
+
+<aside class="sidebar" aria-label="Primary navigation">
+  <a class="brand" href="/users" aria-label="Havenova Operations, Users">
+    <span class="brand-name">Havenova</span>
+    <span class="brand-sub">Operations</span>
+  </a>
+
+  <nav class="primary-nav" aria-label="Product areas">
+    <span class="nav-direct nav-direct--planned" aria-disabled="true">{overviewItem.label}</span>
+
+    {navigationGroups.map((group) => {
+      const groupHasCurrentDestination = group.items.some((item) => item.id === activeDestinationId);
+
+      return (
+        <details class="nav-group" open={groupHasCurrentDestination}>
+          <summary class="nav-group__summary">
+            <span>{group.label}</span>
+            <svg class="nav-group__chevron" aria-hidden="true" viewBox="0 0 12 12" focusable="false"><path d="m4 2 4 4-4 4" /></svg>
+          </summary>
+          <div class="nav-group__items">
+            {group.items.map((item) =>
+              item.enabled && item.href ? (
+                <a class:list={['nav-child', { 'nav-child--active': item.id === activeDestinationId }]} href={item.href} aria-current={item.id === activeDestinationId ? 'page' : undefined}>{item.label}</a>
+              ) : (
+                <span class="nav-child nav-child--planned" aria-disabled="true">{item.label}</span>
+              )
+            )}
+          </div>
+        </details>
+      );
+    })}
+  </nav>
+
+  <div class="sidebar-footer">
+    <small>Powered by Maped Solutions</small>
+  </div>
+</aside>
