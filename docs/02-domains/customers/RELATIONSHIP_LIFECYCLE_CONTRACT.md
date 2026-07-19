@@ -27,6 +27,8 @@ defined in `READ_PROJECTION_AUTHORIZATION_CONTRACT.md`; a relationship lifecycle
 or access result must not be exposed when its primary tenant scope is forbidden.
 `SUMMARY_CONTRACT.md` counts only authoritative `operational` relationships and
 degrades instead of undercounting when lifecycle classification is unsafe.
+`DIRECTORY_QUERY_CONTRACT.md` makes operational relationships the Customers view
+and defines how lifecycle change removes/reconciles selected rows safely.
 
 ## Relationship lifecycle
 

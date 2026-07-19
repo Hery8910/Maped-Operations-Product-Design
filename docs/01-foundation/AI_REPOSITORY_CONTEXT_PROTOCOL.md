@@ -152,6 +152,11 @@ For Customers summary work, also load `SUMMARY_CONTRACT.md`. Do not infer a
 tenant-wide population from cursor rows or use a zero to conceal an unknown,
 restricted or unavailable authoritative source.
 
+For Customers directory-query work, also load `DIRECTORY_QUERY_CONTRACT.md`.
+Keep mutually exclusive population views separate from summaries, and never
+turn a cursor mismatch, unknown or unavailable source into an empty result or a
+global identity lookup.
+
 ### E. Frontend Implementation Task
 
 Load:

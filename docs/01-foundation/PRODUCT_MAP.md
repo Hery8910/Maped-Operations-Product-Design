@@ -138,6 +138,9 @@ Customers exposes these only through least-necessary authorized tenant
 projections; no Customer surface may become a global identity lookup.
 Its tenant-wide summaries are independent operational populations, never totals
 derived from a loaded directory page or combined into one People total.
+Customers Directory uses only the mutually exclusive **Customers**,
+**Invitations** and **Action required** population views. Its search and cursor
+context stays tenant-scoped and never becomes a global identity lookup.
 
 ### 3. Invitations
 

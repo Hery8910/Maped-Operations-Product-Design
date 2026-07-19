@@ -5,7 +5,8 @@
 **Related:** `DOMAIN.md`, `FLOWS.md`, `../invitations/DOMAIN.md`,
 `../internal-notes/DOMAIN.md`, `PROFILE_CONTRACT.md`,
 `RELATIONSHIP_LIFECYCLE_CONTRACT.md`,
-`READ_PROJECTION_AUTHORIZATION_CONTRACT.md`, `SUMMARY_CONTRACT.md`.
+`READ_PROJECTION_AUTHORIZATION_CONTRACT.md`, `SUMMARY_CONTRACT.md`,
+`DIRECTORY_QUERY_CONTRACT.md`.
 
 ## Directory and summary states
 
@@ -23,6 +24,11 @@ The selected detail independently distinguishes loading, ready, error and stale
 or unavailable selection without discarding the directory context. Search,
 filter, cursor position and selected relationship are retained through a
 focused mobile detail and Back where feasible.
+
+The default filter is Customers. Filters replace the population rather than
+accumulate states; query/filter change restarts cursor chain. `query_too_short`,
+true empty, no-filter-results and no-search-results are distinct from unknown,
+restricted and unavailable.
 
 ## Visible entry and action states
 

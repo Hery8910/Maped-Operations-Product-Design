@@ -118,3 +118,7 @@ replace indefinite loading, and impossible combinations degrade before display.
 
 No runtime change, endpoint, aggregation, cache duration, event technology or
 summary query design is authorized by this contract.
+
+`DIRECTORY_QUERY_CONTRACT.md` defines directory filter/query/cursor views. They
+do not alter these tenant-wide populations, and none of these counters is a
+cursor total.

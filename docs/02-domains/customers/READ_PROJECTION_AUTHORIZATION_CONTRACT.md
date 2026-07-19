@@ -115,3 +115,6 @@ Incompatibilities/risks: `UserClient.inactive` is ambiguous; acceptance material
 `SUMMARY_CONTRACT.md` defines tenant-wide counters separately. They share this
 contract's primary authorization/opaque-denial boundary but are not row-derived
 fields and cannot be inferred from a cursor page.
+`DIRECTORY_QUERY_CONTRACT.md` defines the only authorized filter populations,
+query normalization, cursor scope and row-selection semantics for this
+projection.

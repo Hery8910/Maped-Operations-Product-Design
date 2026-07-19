@@ -11,7 +11,8 @@ domains.
 `IMPLEMENTATION_PLAN.md`, `VALIDATION_CHECKLIST.md`; `../invitations/DOMAIN.md`
 and `../internal-notes/DOMAIN.md`; `PROFILE_CONTRACT.md`,
 `RELATIONSHIP_LIFECYCLE_CONTRACT.md`,
-`READ_PROJECTION_AUTHORIZATION_CONTRACT.md`, `SUMMARY_CONTRACT.md`.
+`READ_PROJECTION_AUTHORIZATION_CONTRACT.md`, `SUMMARY_CONTRACT.md`,
+`DIRECTORY_QUERY_CONTRACT.md`.
 
 ## Purpose
 
@@ -86,8 +87,9 @@ loaded list position and useful focus context where feasible.
 
 ### Directory, summary and filters
 
-Search accepts name, email or telephone. Baseline filters are **Customers**,
-**Invitations**, and **Action required**. The summary is tenant-wide rather than
+Search accepts name, email or telephone under `DIRECTORY_QUERY_CONTRACT.md`.
+Baseline filters are **Customers**, **Invitations**, and **Action required**;
+Customers is the default. The summary is tenant-wide rather than
 derived from the loaded cursor page:
 
 | Summary | Population |
@@ -103,6 +105,8 @@ none is currently an administrator action in this surface. The exact Profile
 result and reason rules are in `PROFILE_CONTRACT.md`.
 Population, exactness, freshness and invalidation rules for all four counters
 are in `SUMMARY_CONTRACT.md`; summaries never derive from the loaded directory.
+Filters are mutually exclusive full-population views and summary cards remain
+informative, not hidden filters.
 
 ### Customer detail
 
@@ -167,6 +171,10 @@ mapping and enforcement verification remain open.
 The four Customers summary populations, consistency and freshness policy is
 closed in `SUMMARY_CONTRACT.md`; calculation/transport enforcement, cursor,
 search and filter implementation remain open.
+
+Directory query, search, filter, cursor, ordering, selection and reconciliation
+product semantics are closed in `DIRECTORY_QUERY_CONTRACT.md`; technical cursor/
+search/filter mapping and enforcement remain open.
 
 Remaining gates:
 

@@ -24,12 +24,14 @@ mapping and must return an appropriate unknown access result until verified.
 shape, field-level minimization, freshness and non-disclosing outcome taxonomy.
 `SUMMARY_CONTRACT.md` fixes the four tenant-wide populations and their exactness,
 consistency and per-counter states; it does not define transport or queries.
+`DIRECTORY_QUERY_CONTRACT.md` fixes query populations, search semantics, order,
+cursor, selection and reconciliation; it does not define endpoint or encoding.
 
 ## Required read contracts
 
 | Need | Required semantics | Gate |
 | --- | --- | --- |
-| Directory | tenant-scoped minimized Customer row plus separate Invitation row; authorized name/email search and telephone matching; no address/owner-domain data | cursor ordering, field projection, freshness and authorization verification |
+| Directory | three mutually exclusive views, deterministic normalized search, stable label order, opaque scoped cursor and direct authorized selection | cursor/query/order/selection/reconciliation implementation and enforcement |
 | Summary | four tenant-wide populations with independent counter states, no cursor-derived calculation and coherent invariant review | calculation/transport, authoritative lifecycle/profile/invitation mappings and freshness enforcement |
 | Customer Overview | current email projection, confirmed Profile, all confirmed addresses and `complete`/`incomplete`/`unknown` result with deterministic reasons; source/fallback/freshness per field | authorized Profile read projection and confirmation/freshness mapping |
 | Invitation detail | lifecycle state, delivery meaning and permitted action availability | Invitations lifecycle projection |
@@ -46,6 +48,8 @@ current authorization envelope succeeds.
 Summaries require primary authorization before any counter; no counter is
 returned after a primary denial, and impossible independent combinations degrade
 rather than render ready.
+Cursor/list query state is independent of summaries: filter/query never changes
+summary populations; invalid/expired cursor is not authoritative empty.
 
 ## Required command/outcome contracts
 
@@ -103,8 +107,11 @@ whether archive is reversible; these remain gates until verified.
 7. **Product gate closed:** map all four populations, exact/zero/unknown/
    unavailable behavior, invalidation and coherent review point. This does not
    close summaries transport, cursor, search or filters.
-8. Verify Invitations lifecycle, cooldown, delivery outcome identity, audit and
+8. **Product gate closed:** map default/mutually exclusive filters, normalized
+   search, order, scoped cursor, empty/error states and selection reconciliation.
+   This does not close cursor transport, search/filter implementation or routes.
+9. Verify Invitations lifecycle, cooldown, delivery outcome identity, audit and
    reconciliation.
-9. Verify owner-domain read projections and pagination for Requests/Work Orders.
-10. Verify Internal Notes authorization, retention/archive semantics, authorship
+10. Verify owner-domain read projections and pagination for Requests/Work Orders.
+11. Verify Internal Notes authorization, retention/archive semantics, authorship
    and audit expectations.

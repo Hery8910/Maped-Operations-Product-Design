@@ -16,6 +16,9 @@
 - [ ] Only authorized tenant admins (or explicitly audited super-admin scope)
   receive a tenant projection. Primary denial has no row/detail/count/search or
   resource-existence signal; secondary source denial is distinct restricted.
+- [ ] Default Customers, Invitations and Action required are mutually exclusive
+  views; summary cards are informative; no legacy All/Active/Inactive/Profile
+  complete filter appears.
 - [ ] Summary populations are tenant-wide and Action required is only
   delivery-failed/expired invitations.
 - [ ] Profile result is exactly complete, incomplete or unknown. Complete requires
@@ -41,6 +44,12 @@
 - [ ] Each summary can load, refresh, retain permitted stale value, retry or fail
   independently without resetting directory context; primary denial removes all
   counters and no counter partial leaks.
+- [ ] Search normalizes deterministically, requires two significant characters
+  when nonempty, never performs fuzzy/global lookup and distinguishes short
+  query/no-search/no-filter/true-empty/unavailable states.
+- [ ] Cursor is opaque and scoped to actor/tenant/filter/query/order/review;
+  mismatch/expiry is not empty, load-more retains valid pages, and selection
+  reconciles safely across lifecycle/Invitation/authorization changes.
 - [ ] Requests/Work Orders are hidden when disabled and otherwise offer only
   authorized paginated read projection plus owner-domain navigation.
 - [ ] Note list/create/edit/archive behavior satisfies internal-only access,

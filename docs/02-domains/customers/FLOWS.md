@@ -27,7 +27,7 @@ directory task; zero appears only after authoritative empty evaluation.
 ## 2. Search, filter, paginate and select
 
 ```text
-Enter name, email or telephone → refresh matching cursor projection
+Enter a valid name, email or telephone query → refresh matching cursor projection
 → select Customers | Invitations | Action required → load more → end
 → select entry → detail loads in right panel
 ```
@@ -36,6 +36,8 @@ Search/filter does not silently clear the task context. `Action required` means
 only delivery-failed or expired invitations. On small screens, detail becomes a
 focused view; Back restores directory query, filters, cursor/list position and
 focus near the origin item.
+Customers is the default filter. Filter/query changes replace the population and
+restart cursor; a short query is local explanatory state, not empty result.
 
 ## 3. Consult Customer Overview
 

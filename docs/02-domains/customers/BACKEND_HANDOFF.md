@@ -34,10 +34,17 @@ zero from unknown/unavailable, and provide a coherent review point or safe
 degradation for cross-counter invariants. Do not derive a summary from cursor
 rows or expose it after primary denial.
 
+The query policy is fixed in `DIRECTORY_QUERY_CONTRACT.md`: execute only scoped
+filter/query/order cursor chains; protect cursor mismatch/expiry; guarantee no
+duplicate/omitted entry within coherent review; preserve prior pages on load-more
+failure; and never treat a mismatch as empty.
+
 ## Required capabilities
 
 - Authorized cursor directory query with name/email/telephone search and the
   three approved filters.
+- Stable normalized-label order, scoped opaque cursor/query/filter binding and
+  authoritative direct detail selection/reconciliation behavior.
 - Relationship lifecycle/access projection with stable relationship identity,
   lifecycle result, independent grant/global/tenant availability outcome and
   safe unknown/stale behavior.
@@ -84,3 +91,7 @@ Audit current summary source, operational/inactive mapping, Profile-complete
 aggregation, invitation state/action population, cross-tenant denial and
 projection consistency. Do not convert legacy attention or active/inactive
 counts into approved Customers summaries.
+Audit existing all/active/inactive/attention filters, two-character/debounce,
+page-size/cursor binding/order, cache/dedup, invalid-cursor response and
+selection restoration against this product contract; observed values are not
+approved implementation constants.

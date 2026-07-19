@@ -1121,3 +1121,53 @@ invitation commands or summary UI layout.
 
 A new approved tenant-wide operational counter passes the Product Necessity Gate
 and can state its population, owner, authorization and exactness rules.
+
+---
+
+## D-031 — Keep Customers Directory views query-safe and mutually exclusive
+
+- **Status:** Accepted
+- **Documented:** 2026-07-19
+- **Scope:** Customers Directory populations, search, ordering, cursor and
+  selection reconciliation
+
+**Context**
+
+Legacy Users evidence combines `all`, `active`, `inactive`, invitation and
+attention filters with implementation-specific search, pagination and selection
+behavior. That neither defines a tenant Customer population nor protects the
+global identity boundary, and a cursor failure cannot truthfully mean an empty
+directory.
+
+**Decision**
+
+Customers Directory has exactly three mutually exclusive population views:
+Customers (operational relationships), Invitations (current customer-access
+invitations) and Action required (recoverable delivery-failed/expired
+invitations). Customers is the default and summary cards are informative only.
+Search runs only inside the authorized tenant and active view with deterministic
+normalization, a two-significant-character minimum and no fuzzy/global lookup.
+Rows sort by normalized operational label with a tenant-scoped stable tie-break;
+the opaque cursor is bound to actor, tenant, view, query, order and coherent
+review. Selection is a tenant-scoped reference and reconciles rather than
+duplicating accepted Invitations and resulting Customers.
+
+**Rationale**
+
+The decision gives operators predictable directory behavior while keeping the
+Customer relationship separate from access, Profile completeness and global
+identity. It also makes empty, unavailable, unknown and cursor-error feedback
+calculable rather than visual interpretation.
+
+**Consequences and trade-offs**
+
+Implementation must prove the query/cursor binding, stable order, authorized
+search fields, review coherence and safe refresh behavior. This does not choose
+an endpoint, page size, debounce, index, URL representation, cache strategy or
+Invitation command. It leaves all technical mapping and runtime work open.
+
+**Revisit when**
+
+A demonstrated administrator job requires another population view, relevance
+ordering or a search behavior that remains deterministic, authorized and
+cursor-safe.

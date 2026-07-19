@@ -31,6 +31,9 @@ modal. Right detail supports Customer, Invitation and Invite states.
 - Summaries are tenant-wide, independent from cursor/search/filter/selection and
   can load/fail/retry independently. Do not render unavailable/unknown as zero
   or present invalid counter combinations as ready.
+- Default to Customers. Its three filters are mutually exclusive, cards are
+  informative, short queries remain local explanatory state, and row order is
+  stable normalized label order with opaque reference tie-breaker.
 
 ## State, URL and responsive behavior
 
@@ -51,6 +54,9 @@ use the stable read taxonomy and opacity rules in
 Use `SUMMARY_CONTRACT.md` for exact-zero, refreshing/stale, retry and
 cross-counter degradation behavior; retrying a counter preserves directory
 context.
+Use `DIRECTORY_QUERY_CONTRACT.md` for query normalization, cursor-chain reset,
+empty/error distinction, direct selection and reconciliation; do not preserve
+pages/detail after authorization change or call a cursor mismatch an empty list.
 
 ## Accessibility and branding
 
