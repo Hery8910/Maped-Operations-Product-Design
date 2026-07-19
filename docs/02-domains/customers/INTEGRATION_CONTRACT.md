@@ -20,8 +20,8 @@ repositories/audits are evidence, not prescribed API design.
 | Need | Required semantics | Gate |
 | --- | --- | --- |
 | Directory | tenant-scoped cursor projection; stable customer/invitation identity; name/email/telephone search; Customers/Invitations/Action-required filters | cursor ordering, inclusion and auth verification |
-| Summary | tenant-wide Customers, Profiles complete, pending invitations and action-required counts; independent freshness/loading/error | exact population and Profile completeness source |
-| Customer Overview | identity, confirmed Profile, all confirmed addresses and informational completeness; source/fallback/freshness per field | Profile ownership/visibility and completeness contract |
+| Summary | tenant-wide Customers, Profiles complete (`complete` only), pending invitations and action-required counts; independent freshness/loading/error | exact population and Profile result mapping/freshness |
+| Customer Overview | current email projection, confirmed Profile, all confirmed addresses and `complete`/`incomplete`/`unknown` result with deterministic reasons; source/fallback/freshness per field | authorized Profile read projection and confirmation/freshness mapping |
 | Invitation detail | lifecycle state, delivery meaning and permitted action availability | Invitations lifecycle projection |
 | Related Requests / Work Orders | per-customer tenant-scoped cursor query, compact read-only fields, total and owner-page destination | each owner domain's query, authorization and destination |
 | Notes | customer-associated internal note projection and permitted edit/archive metadata | Internal Notes contract and least-access rule |
@@ -53,9 +53,10 @@ whether archive is reversible; these remain gates until verified.
 - Invitation acceptance reconciles to exactly one tenant–customer relationship;
   accepted records do not remain duplicate normal rows and revoked records leave
   the normal operational directory.
-- Profile confirmation belongs to the customer flow. Customer relationship and
-  access do not imply Profile completion; Profile completeness is informational
-  here.
+- Profile confirmation belongs to the customer flow. Customer relationship,
+  invitation acceptance and tenant access do not imply Profile completion.
+  `PROFILE_CONTRACT.md` defines the informational result; Requests owns request
+  eligibility and may not be inferred from it.
 - Requests and Work Orders own all mutations and their detailed state. Customers
   only navigates with safe customer/entity context.
 - Module visibility is tenant configuration. A disabled module hides its
@@ -66,8 +67,10 @@ whether archive is reversible; these remain gates until verified.
 1. Verify identity/auth acceptance for new and existing identity, opaque-token
    security, interrupted onboarding and resume.
 2. Verify tenant isolation and role enforcement for every projection/command.
-3. Verify Profile data source, all-address visibility, completeness definition,
-   freshness and missing/restricted fallbacks.
+3. **Product gate closed:** map the approved Profile data source, all-address
+   visibility, customer confirmation, least-necessary admin read authorization,
+   result/freshness and missing/restricted fallbacks. This is implementation
+   verification, not a reason to redefine completeness.
 4. Verify directory cursor/filter/search semantics and authoritative summary
    populations.
 5. Verify Invitations lifecycle, cooldown, delivery outcome identity, audit and

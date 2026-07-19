@@ -3,7 +3,7 @@
 **Status:** DEFINED
 **Authority:** Visible Customers state, action and composition authority.
 **Related:** `DOMAIN.md`, `FLOWS.md`, `../invitations/DOMAIN.md`,
-`../internal-notes/DOMAIN.md`.
+`../internal-notes/DOMAIN.md`, `PROFILE_CONTRACT.md`.
 
 ## Directory and summary states
 
@@ -30,13 +30,15 @@ focused mobile detail and Back where feasible.
 | Invitation — revoked | acceptance capability invalidated | Remove from normal directory |
 
 `Action required` includes only delivery failed and expired because each has a
-legitimate tenant-admin recovery action. It is not a generic severity label.
+legitimate tenant-admin recovery action. `profileOperationalCompleteness` is
+`complete`, `incomplete` or `unknown`; incomplete/unknown are informational and
+never Action required. It is not a generic severity label.
 
 ## Section availability
 
 | Surface | Availability state |
 | --- | --- |
-| Overview | Profile data loading, ready, unavailable/retry, or restricted; display completeness informationally |
+| Overview | Profile data loading, ready, unavailable/retry, restricted or stale; display `complete`/`incomplete`/`unknown` informationally |
 | Requests | Hidden when module disabled; otherwise loading, ready, true empty, error/retry, loading more/end |
 | Work orders | Hidden when module disabled; otherwise loading, ready, true empty, error/retry, loading more/end |
 | Notes | Loading, ready, true empty, error/retry; create/edit/archive each idle, pending, success or error |
@@ -60,3 +62,4 @@ for this tenant and do not substitute a zero result.
 | Open Request / Work Order | authorized viewer | navigates to owning domain, subject to that domain authorization |
 | Create, edit, archive internal note | authorized tenant admin/super admin | internal note capability only |
 | Edit confirmed Profile | nobody in Customers | excluded; customer Profile flow owns it |
+| Edit global email / credentials / tenant access | nobody in Customers | Identity/Auth or authorized tenant-access owner owns it |

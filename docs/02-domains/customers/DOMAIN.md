@@ -9,7 +9,7 @@ domains.
 **Related:** `FLOWS.md`, `STATES_AND_ACTIONS.md`, `PRODUCT_NOTES.md`,
 `INTEGRATION_CONTRACT.md`, `BACKEND_HANDOFF.md`, `FRONTEND_HANDOFF.md`,
 `IMPLEMENTATION_PLAN.md`, `VALIDATION_CHECKLIST.md`; `../invitations/DOMAIN.md`
-and `../internal-notes/DOMAIN.md`.
+and `../internal-notes/DOMAIN.md`; `PROFILE_CONTRACT.md`.
 
 ## Purpose
 
@@ -55,7 +55,7 @@ and write. A permission denial must not leak partial tenant data.
 | --- | --- | --- |
 | Global identity and authentication | Identity/Auth | Resolve acceptance identity; never treat identity alone as customer membership |
 | Tenant–customer relationship | Customers | Directory row and selected customer context |
-| Confirmed Profile and addresses | Profile | Read identity, Profile completeness and all confirmed addresses; tenant admin cannot edit confirmed data here |
+| Confirmed Profile and addresses | Profile | Read approved tenant-scoped Profile projection, deterministic completeness and all confirmed addresses; tenant admin cannot edit confirmed data here |
 | Invitation lifecycle and delivery | Invitations | Show customer invitation rows and invoke approved lifecycle actions |
 | Requests | Service Requests | Tenant-scoped, paginated, read-only customer projection and navigation to owner page |
 | Work Orders | Work Orders | Tenant-scoped, paginated, read-only customer projection and navigation to owner page |
@@ -86,22 +86,23 @@ derived from the loaded cursor page:
 | Summary | Population |
 | --- | --- |
 | Customers | tenant–customer relationships |
-| Profiles complete | customers whose Profile completeness result is complete |
+| Profiles complete | Customers whose `profileOperationalCompleteness` result is `complete` |
 | Pending invitations | customer invitations in `pending` |
 | Action required | only `delivery_failed` and `expired` invitations |
 
-`Action required` deliberately excludes pending invitations, incomplete
-Profiles, missing phone/address and absence of Requests or Work Orders: none is
-currently an administrator action in this surface.
+`Action required` deliberately excludes pending invitations, incomplete or
+unknown Profiles, missing phone/address and absence of Requests or Work Orders:
+none is currently an administrator action in this surface. The exact Profile
+result and reason rules are in `PROFILE_CONTRACT.md`.
 
 ### Customer detail
 
 Customer detail has exactly these sections: **Overview**, **Requests**, **Work
 orders**, and **Notes**. Activity is excluded.
 
-- **Overview:** identity, Profile, all confirmed Profile addresses, and an
-  informational Profile-completeness state. The tenant admin cannot edit
-  confirmed Profile data here.
+- **Overview:** current email from Identity/Auth, approved Profile context, all
+  confirmed Profile addresses, and informational Profile completeness/reasons.
+  The tenant admin cannot edit confirmed Profile data or global email here.
 - **Requests / Work orders:** only shown when the respective tenant module is
   enabled; total plus paginated read-only summary; opening an entity navigates
   to its owning domain. No inline operational mutations or copied detail page.
@@ -134,10 +135,16 @@ and audit lifecycle.
 - Customer-visible notes, attachments, mentions or rich-text notes.
 - A universal People/Users page. The legacy route is a migration concern only.
 
-## Open product and contract gates
+## Closed product gate and open implementation gates
 
-- Profile completeness definition, source and freshness must be verified with
-  the Profile owner; it is informational, not Action required.
+The Customer ↔ Profile ownership and completeness policy is closed in
+`PROFILE_CONTRACT.md`: Profile incomplete is deterministic and informational,
+not Action required. Its backend/frontend authorization, source, confirmation
+and freshness mapping remains open; this does not make a Customers slice
+implementation-ready.
+
+Remaining gates:
+
 - Requests and Work Orders must define their tenant-scoped customer projections,
   pagination, summary fields and destination routes.
 - Identity/Auth must verify new/existing identity acceptance and safe resume.

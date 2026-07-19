@@ -950,3 +950,48 @@ by tenant branding.
 
 A validated cross-tenant requirement demonstrates a new shared pattern rather
 than a tenant-specific layout exception.
+
+---
+
+## D-027 — Separate Customer relationship, access, Profile completeness and Request eligibility
+
+- **Status:** Accepted
+- **Documented:** 2026-07-19
+- **Scope:** Customers ↔ Profile product and architecture gate
+
+**Context**
+
+The product needs a Profiles complete summary and an informational Profile state
+without turning ordinary missing data into admin attention or treating a global
+identity/Profile record as the tenant Customer. Existing evidence conflates some
+of these concepts: invitation acceptance currently creates/updates Profile and
+Request creation checks Profile existence.
+
+**Decision**
+
+Customer is the tenant-scoped operational relationship. Global Identity/Auth,
+tenant access, invitation acceptance, Profile operational completeness and
+Request eligibility are independent results. Profile is operationally complete
+only when a Profile exists with a customer-confirmed name and supported preferred
+locale. Telephone, address and global email are not inputs. Incomplete and
+unknown Profile results are informational, never Action required. Request
+eligibility belongs exclusively to Service Requests.
+
+**Rationale**
+
+The rule supports a useful, calculable customer context without inventing
+universal contact/address requirements or giving a tenant admin a task they
+cannot perform. It retains customer authority over confirmed personal data.
+
+**Consequences and trade-offs**
+
+Backend/frontend must expose a least-necessary read projection and map
+confirmation/freshness safely. The policy does not authorize Profile writes,
+endpoint/schema names, migration design or Requests readiness behavior. The
+Customers Directory and Overview slice remains PLANNED.
+
+**Revisit when**
+
+Validated evidence establishes a necessary operational use for an additional
+Profile field, or the Profile/communication contract changes supported locale
+semantics.

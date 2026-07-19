@@ -10,7 +10,9 @@
   `/people/customers` and legacy `/people/users` handling is planned.
 - [ ] Summary populations are tenant-wide and Action required is only
   delivery-failed/expired invitations.
-- [ ] Profile completeness is informational; it does not create Action required.
+- [ ] Profile result is exactly complete, incomplete or unknown. Complete requires
+  customer-confirmed name and supported locale; phone/address/email are excluded
+  inputs. Incomplete/unknown do not create Action required.
 
 ## Directory, detail and related work
 
@@ -18,8 +20,8 @@
   required filters produce distinguishable results.
 - [ ] Initial, refresh, ready, true-empty, search-empty, filter-empty,
   error/retry, loading-more/end and selected load/error/stale all work.
-- [ ] Overview shows identity, Profile, all addresses and completeness without
-  tenant-admin editing.
+- [ ] Overview shows authorized current-email projection, Profile, all addresses
+  and deterministic completeness/reasons without tenant-admin editing.
 - [ ] Requests/Work Orders are hidden when disabled and otherwise offer only
   authorized paginated read projection plus owner-domain navigation.
 - [ ] Note list/create/edit/archive behavior satisfies internal-only access,
@@ -36,6 +38,9 @@
   accepted/revoked rows reconcile/remove correctly.
 - [ ] New/existing identity acceptance, explicit Profile correction/save and
   interrupted-resume never silently overwrite confirmed Profile data.
+- [ ] Customer relationship eligibility, invitation acceptance, tenant access,
+  Profile completeness and Request eligibility are evaluated independently;
+  Request eligibility only comes from Service Requests.
 
 ## Frontend quality and configuration
 

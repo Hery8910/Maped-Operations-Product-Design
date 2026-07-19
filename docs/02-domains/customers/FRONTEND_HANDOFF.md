@@ -18,8 +18,8 @@ modal. Right detail supports Customer, Invitation and Invite states.
   required.
 - Customer: Overview, Requests, Work orders, Notes; hide owner sections when
   their tenant module is disabled.
-- Overview: identity, Profile, all addresses, informational completeness;
-  read-only.
+- Overview: current email projection, Profile, all addresses and deterministic
+  `complete`/`incomplete`/`unknown` completeness with reasons; read-only.
 - Requests/Work Orders: compact paginated read projections and navigation only.
 - Notes: internal create/list/edit/archive only when the contract permits.
 
@@ -31,6 +31,8 @@ is a gate. Preserve context through refresh and narrow focused detail/form Back.
 Implement every documented loading/empty/error/stale/action/permission/module
 state. Validation is field-local; pending blocks duplicates; local feedback
 preserves input. Revoke uses proportionate confirmation and focus restoration.
+Do not derive request eligibility from Profile completeness. Unknown Profile data
+must not be styled or counted as incomplete.
 
 ## Accessibility and branding
 
@@ -43,5 +45,6 @@ error colors.
 
 ## Excluded implementation
 
-No Profile editor, Activity, duplicate Requests/Work Orders page, customer
-visible notes, generic access administration or tenant-specific layout.
+No Profile editor, global-email editor, tenant-access editor, Activity, duplicate
+Requests/Work Orders page, customer visible notes, generic access administration
+or tenant-specific layout.

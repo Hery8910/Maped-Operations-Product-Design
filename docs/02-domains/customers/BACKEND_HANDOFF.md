@@ -11,6 +11,12 @@ Notes. Keep global identity/auth, Profile, Invitation lifecycle, Requests, Work
 Orders and Notes as separately owned concepts. Do not collapse them into a
 single `user` record or a `profileComplete` access status.
 
+The product policy is fixed in `PROFILE_CONTRACT.md`: global email/credentials
+remain Identity/Auth; Profile owns confirmed name, locale, optional telephone
+and addresses; relationship/access are separate; and Profile completeness is a
+three-result derivation. Backend work must map those concepts without choosing
+product-invented endpoint or schema names.
+
 ## Required capabilities
 
 - Authorized cursor directory query with name/email/telephone search and the
@@ -19,6 +25,9 @@ single `user` record or a `profileComplete` access status.
   counters.
 - Stable detail queries for customer, invitation, Profile/addresses and enabled
   related read projections.
+- A least-necessary tenant-admin Profile read projection: current approved email,
+  Profile context, all approved addresses and complete/incomplete/unknown result
+  plus deterministic missing-confirmation reasons.
 - Delegation to Invitations commands/outcomes and Notes commands/outcomes.
 - Tenant-scoped paginated Request and Work Order read queries by `customerId`,
   supplied by their owner domains.
@@ -35,7 +44,8 @@ reconciliation behavior are explicit.
 ## Contract gates
 
 Audit the existing backend for actual model ownership, query shape, cursor,
-permission middleware, summary source, Profile address source, module
-configuration, invitation delivery/lifecycle/cooldown, notes capability and
-owner-domain related projections. Record verified facts in the production
-repository; do not promote observed names to product authority without mapping.
+permission middleware, summary source, Profile confirmation/address source,
+module configuration, invitation delivery/lifecycle/cooldown, notes capability
+and owner-domain related projections. Current evidence that invitation acceptance
+creates/updates Profile and that Profile is holder-private is an incompatibility
+to map, not permission to silently overwrite or grant broad Profile CRUD.

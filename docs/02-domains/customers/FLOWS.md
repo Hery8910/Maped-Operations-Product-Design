@@ -33,13 +33,14 @@ focus near the origin item.
 
 ```text
 Select Customer → Overview loading → identity + Profile + all addresses
-→ inspect informational Profile completeness
+→ inspect informational Profile completeness/reasons
 ```
 
-Profile data is read-only in Customers. Missing, restricted or unavailable data
-uses its own fallback; it is never represented as a failed profile or as Action
-required unless the owning Profile contract later defines a legitimate admin
-action.
+Profile data is read-only in Customers. Its result is deterministically
+complete, incomplete or unknown; unknown availability is never shown as
+incomplete. Missing, restricted or unavailable data uses its own fallback. None
+of those states is Action required because the tenant admin cannot correct
+confirmed Profile data here.
 
 ## 4. Consult related Requests or Work Orders
 

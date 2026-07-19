@@ -39,6 +39,16 @@ confirmed addresses and completeness meaning. It intentionally does not turn
 Customers into Profile administration. The customer is the authority for
 reviewing/correcting confirmed information.
 
+## Why Profile completeness is narrow and not attention
+
+The MVP needs a confirmed customer name to identify the person and a preferred
+locale for understandable customer-facing communication. It does not demonstrate
+a universal need for telephone or an address. Therefore only confirmed name and
+supported locale define operational Profile completeness. The result helps
+interpret context, but it is not Action required: the tenant admin cannot fix it
+from Customers, and Request eligibility remains the Service Requests owner's
+separate decision.
+
 ## Why related work is only a projection
 
 Requests and Work Orders matter to understand customer context, but their
