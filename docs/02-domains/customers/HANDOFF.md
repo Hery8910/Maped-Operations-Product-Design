@@ -14,6 +14,7 @@ Customers requires two coordinated implementation handoffs:
 Implementers must also use the shared [Invitations contract](../invitations/INTEGRATION_CONTRACT.md)
 and [Internal Notes contract](../internal-notes/INTEGRATION_CONTRACT.md), plus
 the [Customer ↔ Profile contract](PROFILE_CONTRACT.md) and owner-domain
-contracts for Service Requests and Work Orders when they are defined. This
+contracts for Service Requests and Work Orders when they are defined, plus the
+[relationship lifecycle contract](RELATIONSHIP_LIFECYCLE_CONTRACT.md). This
 package does not authorize implementation until the gates in
 `IMPLEMENTATION_PLAN.md` are verified.

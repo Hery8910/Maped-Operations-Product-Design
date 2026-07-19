@@ -8,6 +8,11 @@
   source, fallback, freshness and authorization.
 - [ ] Customers is tenant–customer relationship, not global identities; route is
   `/people/customers` and legacy `/people/users` handling is planned.
+- [ ] Only operational relationships appear/count/search in normal Customers.
+  Lifecycle, relationship grant, global Identity/Auth safety and tenant
+  availability are independently represented; unknown is never treated as zero.
+- [ ] `inactive` has no assumed product mapping. Restricted access, archived/
+  removed relationship and tenant unavailability do not create Action required.
 - [ ] Summary populations are tenant-wide and Action required is only
   delivery-failed/expired invitations.
 - [ ] Profile result is exactly complete, incomplete or unknown. Complete requires
@@ -41,6 +46,9 @@
 - [ ] Customer relationship eligibility, invitation acceptance, tenant access,
   Profile completeness and Request eligibility are evaluated independently;
   Request eligibility only comes from Service Requests.
+- [ ] Accepted invitation reconciles to exactly one operational relationship;
+  existing/archived relationship paths cannot create duplicates or a blind
+  reinvitation.
 
 ## Frontend quality and configuration
 

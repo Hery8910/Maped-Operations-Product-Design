@@ -16,9 +16,10 @@ One global identity may legitimately have Customer relationships in multiple
 tenants. A customer relationship can be read by its tenant only; global identity
 does not become tenant-owned information.
 
-The directory represents either an eligible Customer relationship or a separate
-customer invitation. An invitation is not a Customer row before its accepted
-relationship is reconciled.
+The directory represents either an operational Customer relationship or a
+separate customer invitation. An invitation is not a Customer row before its
+accepted relationship is reconciled. Lifecycle, access and directory rules are
+defined in `RELATIONSHIP_LIFECYCLE_CONTRACT.md`.
 
 ## Ownership and access matrix
 
@@ -31,8 +32,8 @@ relationship is reconciled.
 | Telephone | Profile | optional create/correct/remove | reads approved tenant-scoped Profile projection and may search it; cannot edit | absence is `not provided`, never incomplete by itself |
 | Confirmed addresses | Profile | create/correct/remove | reads all approved tenant-scoped addresses; cannot edit | all addresses are shown with source/freshness; no address is required for Profile completeness |
 | Profile operational completeness | Profile policy | sees explanation and completes own missing confirmation | reads informational result/reason; cannot change it | deterministic derived result below; unknown data is not incomplete |
-| Customer relationship ID and tenant association | Customers | may read own relationship where customer experience later permits | reads selected/directory relationship | creates/reconciles through authorized lifecycle; stable tenant-scoped reference |
-| Tenant access entitlement | tenant relationship / Identity/Auth | receives access through approved acceptance/access flows | may read only approved access meaning; no generic access management in Customers | derived from tenant grant plus global safety; not `Profile` state |
+| Customer relationship ID and tenant association | Customers | may read own relationship where customer experience later permits | reads operational relationship projection | creates/reconciles through authorized lifecycle; stable tenant-scoped reference |
+| Tenant access entitlement | tenant relationship / Identity/Auth | receives access through approved acceptance/access flows | may read only approved access meaning; no generic access management in Customers | derived from separate grant, global safety and tenant availability; not `Profile` state |
 | Request / Work Order source data | owning domain | acts only through owner-domain permissions | reads/navigates only through owner-domain projection/permission | Customers never edits or derives their operational state |
 | Directory label, searchable index, summaries and detail projection | Customers projection | no direct mutation | reads authorized tenant projection | derived/cacheable; references source records, carries freshness/stale semantics and is never a source of truth |
 
@@ -48,9 +49,9 @@ not yet supported.
 
 | Level | Deterministic rule | Does not imply |
 | --- | --- | --- |
-| **Eligible to appear as Customer** | An authoritative tenant–customer relationship exists, is within the current tenant, and is not removed/archived by its owner contract. | Profile existence, Profile completeness, telephone/address, Request/Work Order, invitation row or tenant access entitlement. |
+| **Eligible to appear as Customer** | Relationship lifecycle is `operational` for the current tenant. | Profile existence, Profile completeness, telephone/address, Request/Work Order, invitation row or tenant access entitlement. |
 | **Invitation accepted** | The relevant customer invitation lifecycle is `accepted` and its reconciliation outcome is recorded. | Profile completion or continuing tenant access if later security policy prevents it. |
-| **Tenant access permitted** | The relationship has an approved tenant access grant **and** Identity/Auth does not deny global access. | Invitation row visibility, Profile completeness or Request eligibility. |
+| **Tenant access permitted** | Relationship is operational, tenant grant is approved, Identity/Auth allows access and tenant is serving. | Invitation row visibility, Profile completeness or Request eligibility. |
 | **Profile operationally complete** | A Profile exists; the customer has explicitly confirmed a non-empty customer name and a supported preferred locale. | Telephone, any address, tenant access or Request eligibility. |
 | **Eligible to create a Request** | Only the Service Requests owner returns an authoritative eligibility result from its own contract. | Profile completeness, address count or customer directory presence. |
 
@@ -108,7 +109,8 @@ endpoint, model or runtime change is authorized by this document.
 ## Remaining implementation mapping gates
 
 - Map the product's Customer relationship, tenant access grant and removed/
-  archived semantics to verified backend concepts without adopting final names.
+  archived semantics through `RELATIONSHIP_LIFECYCLE_CONTRACT.md` without
+  adopting final names.
 - Verify how Profile stores/proves customer confirmation, current name, locale,
   phone and all addresses; return `unknown` where a safe mapping is unavailable.
 - Define least-necessary tenant-admin Profile read authorization and projection

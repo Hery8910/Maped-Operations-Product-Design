@@ -22,6 +22,9 @@ modal. Right detail supports Customer, Invitation and Invite states.
   `complete`/`incomplete`/`unknown` completeness with reasons; read-only.
 - Requests/Work Orders: compact paginated read projections and navigation only.
 - Notes: internal create/list/edit/archive only when the contract permits.
+- Normal Customers directory/count/search include operational relationships
+  only; restricted/unknown access remains an informational/restricted result,
+  not a different relationship row or Action required.
 
 ## State, URL and responsive behavior
 
@@ -33,6 +36,9 @@ state. Validation is field-local; pending blocks duplicates; local feedback
 preserves input. Revoke uses proportionate confirmation and focus restoration.
 Do not derive request eligibility from Profile completeness. Unknown Profile data
 must not be styled or counted as incomplete.
+Do not treat current implementation `inactive` as a UI status. Show lifecycle,
+access, tenant-unavailable and global-restriction outcomes only when their
+contract mapping is verified; otherwise use unknown/unavailable safely.
 
 ## Accessibility and branding
 
@@ -47,4 +53,5 @@ error colors.
 
 No Profile editor, global-email editor, tenant-access editor, Activity, duplicate
 Requests/Work Orders page, customer visible notes, generic access administration
-or tenant-specific layout.
+or tenant-specific layout. Archive, remove and reactivate relationship controls
+are also excluded.

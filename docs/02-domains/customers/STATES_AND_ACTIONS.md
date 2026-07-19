@@ -3,7 +3,8 @@
 **Status:** DEFINED
 **Authority:** Visible Customers state, action and composition authority.
 **Related:** `DOMAIN.md`, `FLOWS.md`, `../invitations/DOMAIN.md`,
-`../internal-notes/DOMAIN.md`, `PROFILE_CONTRACT.md`.
+`../internal-notes/DOMAIN.md`, `PROFILE_CONTRACT.md`,
+`RELATIONSHIP_LIFECYCLE_CONTRACT.md`.
 
 ## Directory and summary states
 
@@ -22,7 +23,9 @@ focused mobile detail and Back where feasible.
 
 | Entry | Visible meaning | Customers action |
 | --- | --- | --- |
-| Customer | tenant–customer relationship exists | Read Overview, related modules and Notes as permitted |
+| Customer — operational | tenant–customer relationship is operational; access may be separately permitted, restricted or unknown | Read approved Overview, related modules and Notes as permitted; no lifecycle action |
+| Customer — archived/removed | retained outside normal operations, or no longer retained, respectively | Not a normal directory row; no Customers lifecycle action |
+| Customer — lifecycle unknown | source cannot safely determine relationship lifecycle | No invented row/count/action; existing selection is unavailable/restricted |
 | Invitation — pending | customer has not completed acceptance | Resend or revoke through Invitations |
 | Invitation — delivery failed | invitation persists but delivery failed | Resend through Invitations; no duplicate invite |
 | Invitation — expired | acceptance credential needs renewal | Renew and resend, or revoke, through Invitations |
@@ -33,6 +36,10 @@ focused mobile detail and Back where feasible.
 legitimate tenant-admin recovery action. `profileOperationalCompleteness` is
 `complete`, `incomplete` or `unknown`; incomplete/unknown are informational and
 never Action required. It is not a generic severity label.
+
+Operational Customers with restricted/unknown access, archived/removed Customers,
+tenant suspension and global Identity/Auth restriction are likewise not Action
+required: no approved tenant-admin Customers action resolves them.
 
 ## Section availability
 
@@ -63,3 +70,4 @@ for this tenant and do not substitute a zero result.
 | Create, edit, archive internal note | authorized tenant admin/super admin | internal note capability only |
 | Edit confirmed Profile | nobody in Customers | excluded; customer Profile flow owns it |
 | Edit global email / credentials / tenant access | nobody in Customers | Identity/Auth or authorized tenant-access owner owns it |
+| Archive / remove / reactivate Customer relationship | nobody in Customers | excluded until a separate authorized lifecycle job is defined |

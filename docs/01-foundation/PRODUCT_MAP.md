@@ -131,6 +131,10 @@ Purpose:
 Customers is not a global identity directory. Identity/Auth and the reusable
 Invitations lifecycle remain separate capabilities.
 
+Customer relationship lifecycle, tenant access grant, global Identity/Auth
+safety and tenant lifecycle availability are distinct. A tenant becoming
+unavailable must not silently archive or remove its Customer relationships.
+
 ### 3. Invitations
 
 Purpose:

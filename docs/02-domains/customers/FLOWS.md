@@ -15,6 +15,8 @@ Open /people/customers → initial directory/summary loading → ready
 Initial loading preserves orientation; refresh retains safe content. True empty,
 search-empty, filter-empty and unavailable data have distinct explanations and
 recovery. Selection loads in the right panel without replacing the directory.
+Only operational relationships are normal Customer rows; a restricted access
+result does not remove a known relationship or create Action required.
 
 ## 2. Search, filter, paginate and select
 
@@ -107,7 +109,11 @@ Customer opens opaque credential → establishes/uses identity → accepts acces
 Acceptance may use a new or existing identity. It never silently overwrites
 confirmed Profile data. If interrupted after access acceptance, customer access
 remains available; the customer gets a non-blocking resume path. Details and
-gates are shared with Invitations and Profile dependencies.
+gates are shared with Invitations and Profile dependencies. Reconciliation
+creates one operational relationship when none exists; an existing operational
+relationship is reused and the accepted invitation leaves normal rows. Archived
+relationship conflict/recovery is outside this MVP; acceptance must not create a
+duplicate relationship.
 
 ## 8. Maintain Internal Notes
 

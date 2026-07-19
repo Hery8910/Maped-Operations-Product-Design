@@ -15,11 +15,16 @@ ownership of their source models or workflows.
 Final endpoint, model and event names are contract gates; names in current
 repositories/audits are evidence, not prescribed API design.
 
+`RELATIONSHIP_LIFECYCLE_CONTRACT.md` fixes product semantics: lifecycle,
+relationship grant, global Identity/Auth safety and tenant availability must be
+mapped separately. Current backend `UserClient.inactive` is not a product status
+mapping and must return an appropriate unknown access result until verified.
+
 ## Required read contracts
 
 | Need | Required semantics | Gate |
 | --- | --- | --- |
-| Directory | tenant-scoped cursor projection; stable customer/invitation identity; name/email/telephone search; Customers/Invitations/Action-required filters | cursor ordering, inclusion and auth verification |
+| Directory | tenant-scoped cursor projection; operational Customer relationships plus separate invitations; name/email/telephone search; Customers/Invitations/Action-required filters | cursor ordering, lifecycle inclusion, access/status projection and authorization verification |
 | Summary | tenant-wide Customers, Profiles complete (`complete` only), pending invitations and action-required counts; independent freshness/loading/error | exact population and Profile result mapping/freshness |
 | Customer Overview | current email projection, confirmed Profile, all confirmed addresses and `complete`/`incomplete`/`unknown` result with deterministic reasons; source/fallback/freshness per field | authorized Profile read projection and confirmation/freshness mapping |
 | Invitation detail | lifecycle state, delivery meaning and permitted action availability | Invitations lifecycle projection |
@@ -57,6 +62,9 @@ whether archive is reversible; these remain gates until verified.
   invitation acceptance and tenant access do not imply Profile completion.
   `PROFILE_CONTRACT.md` defines the informational result; Requests owns request
   eligibility and may not be inferred from it.
+- Tenant suspension/unavailability, global restriction and relationship lifecycle
+  must not overwrite one another. Unavailability/restriction is not an implicit
+  archive/remove or Action-required condition.
 - Requests and Work Orders own all mutations and their detailed state. Customers
   only navigates with safe customer/entity context.
 - Module visibility is tenant configuration. A disabled module hides its
@@ -73,8 +81,11 @@ whether archive is reversible; these remain gates until verified.
    verification, not a reason to redefine completeness.
 4. Verify directory cursor/filter/search semantics and authoritative summary
    populations.
-5. Verify Invitations lifecycle, cooldown, delivery outcome identity, audit and
+5. **Product gate closed:** map relationship lifecycle, grant, global security,
+   tenant availability, accepted-invitation reconciliation and duplicate conflict
+   behavior independently; current `inactive` semantics must not be guessed.
+6. Verify Invitations lifecycle, cooldown, delivery outcome identity, audit and
    reconciliation.
-6. Verify owner-domain read projections and pagination for Requests/Work Orders.
-7. Verify Internal Notes authorization, retention/archive semantics, authorship
+7. Verify owner-domain read projections and pagination for Requests/Work Orders.
+8. Verify Internal Notes authorization, retention/archive semantics, authorship
    and audit expectations.

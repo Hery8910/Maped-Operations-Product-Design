@@ -32,6 +32,16 @@ Delivery failure and expiry qualify because Resend or Renew and resend exists.
 Pending, incomplete Profile and absent optional/related information do not
 become attention merely to create a visually busy dashboard.
 
+## Why access does not define the Customer relationship
+
+An operational relationship remains useful to an authorized administrator even
+when the customer cannot currently access the tenant because of a separate
+tenant, access-grant or global-security condition. Removing it from the
+directory would erase context and make history look deleted. Conversely,
+archiving/removing a relationship is a lifecycle decision with retention
+consequences, not a synonym for `inactive`. Neither is an Action-required item
+until the product defines a concrete, authorized tenant-admin recovery action.
+
 ## Why Overview is read-only and complete enough
 
 Overview supports recognition and relationship context: identity, Profile, all

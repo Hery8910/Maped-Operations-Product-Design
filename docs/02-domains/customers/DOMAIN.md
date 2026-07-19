@@ -9,7 +9,8 @@ domains.
 **Related:** `FLOWS.md`, `STATES_AND_ACTIONS.md`, `PRODUCT_NOTES.md`,
 `INTEGRATION_CONTRACT.md`, `BACKEND_HANDOFF.md`, `FRONTEND_HANDOFF.md`,
 `IMPLEMENTATION_PLAN.md`, `VALIDATION_CHECKLIST.md`; `../invitations/DOMAIN.md`
-and `../internal-notes/DOMAIN.md`; `PROFILE_CONTRACT.md`.
+and `../internal-notes/DOMAIN.md`; `PROFILE_CONTRACT.md`,
+`RELATIONSHIP_LIFECYCLE_CONTRACT.md`.
 
 ## Purpose
 
@@ -54,7 +55,8 @@ and write. A permission denial must not leak partial tenant data.
 | Concept | Owner | Customers use |
 | --- | --- | --- |
 | Global identity and authentication | Identity/Auth | Resolve acceptance identity; never treat identity alone as customer membership |
-| Tenant–customer relationship | Customers | Directory row and selected customer context |
+| Tenant–customer relationship | Customers | Lifecycle/normal-directory inclusion and selected customer context |
+| Tenant access grant | Customer relationship | Distinct from relationship lifecycle and global security; no generic management action in Customers |
 | Confirmed Profile and addresses | Profile | Read approved tenant-scoped Profile projection, deterministic completeness and all confirmed addresses; tenant admin cannot edit confirmed data here |
 | Invitation lifecycle and delivery | Invitations | Show customer invitation rows and invoke approved lifecycle actions |
 | Requests | Service Requests | Tenant-scoped, paginated, read-only customer projection and navigation to owner page |
@@ -85,7 +87,7 @@ derived from the loaded cursor page:
 
 | Summary | Population |
 | --- | --- |
-| Customers | tenant–customer relationships |
+| Customers | operational tenant–customer relationships only |
 | Profiles complete | Customers whose `profileOperationalCompleteness` result is `complete` |
 | Pending invitations | customer invitations in `pending` |
 | Action required | only `delivery_failed` and `expired` invitations |
@@ -113,7 +115,9 @@ orders**, and **Notes**. Activity is excluded.
 
 An invitation is a distinct selected entry. Customers presents its lifecycle
 meaning and the legitimate action supplied by Invitations. Accepted invitations
-reconcile to the relationship; revoked invitations leave the normal directory.
+reconcile to exactly one operational relationship; revoked invitations leave the
+normal directory. Relationship/archive/access semantics are in
+`RELATIONSHIP_LIFECYCLE_CONTRACT.md`.
 
 ## Customer invitation boundary
 
@@ -129,7 +133,8 @@ and audit lifecycle.
 - Tenant-specific layouts or semantic status colors.
 - Administrative editing of confirmed Profiles or addresses.
 - Activity, Communication, CRM pipeline, generic active/inactive management,
-  accepted-customer access administration and unrelated identity management.
+  accepted-customer access administration, relationship archive/remove/reactivate
+  actions and unrelated identity management.
 - Requests/Work Orders editing, state transitions, assignment, cancellation,
   rescheduling or duplicated owner pages.
 - Customer-visible notes, attachments, mentions or rich-text notes.
@@ -142,6 +147,11 @@ The Customer ↔ Profile ownership and completeness policy is closed in
 not Action required. Its backend/frontend authorization, source, confirmation
 and freshness mapping remains open; this does not make a Customers slice
 implementation-ready.
+
+The Customer relationship lifecycle, directory inclusion, tenant-access and
+global-security separation policy is closed in
+`RELATIONSHIP_LIFECYCLE_CONTRACT.md`. Its mapping to backend/tenant lifecycle
+and authorization projections remains open and does not make a slice ready.
 
 Remaining gates:
 

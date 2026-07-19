@@ -995,3 +995,46 @@ Customers Directory and Overview slice remains PLANNED.
 Validated evidence establishes a necessary operational use for an additional
 Profile field, or the Profile/communication contract changes supported locale
 semantics.
+
+---
+
+## D-028 — Keep Customer relationship lifecycle separate from access and tenant state
+
+- **Status:** Accepted
+- **Documented:** 2026-07-19
+- **Scope:** Customers relationship lifecycle and directory inclusion
+
+**Context**
+
+Current evidence exposes `UserClient` statuses including `inactive`, global Auth
+status and tenant platform states, but does not give `inactive` a stable product
+meaning. Reusing it as relationship archive, access denial, invitation state or
+Profile status would make the directory inconsistent and unsafe.
+
+**Decision**
+
+Customers recognizes only operational, archived, removed and unknown lifecycle
+results. The normal directory/count/search includes operational relationships
+only. Tenant access grant, global Identity/Auth safety and tenant availability
+are separate results. `UserClient.inactive` has no direct product mapping and
+remains unknown access evidence until verified. Archive/remove/reactivate are
+not Customers MVP actions. Accepted invitations reconcile to one relationship;
+reinvitation cannot create a duplicate current or archived relationship.
+
+**Rationale**
+
+The separation preserves historical context without turning security, tenant
+operations or incomplete implementation evidence into misleading Customer
+states or actionable queues.
+
+**Consequences and trade-offs**
+
+Backend/frontend must provide independent, fresh enough projections. Tenant
+suspension may restrict availability, but does not mutate relationship history.
+The decision closes product architecture only; it does not approve lifecycle
+commands, delivery behavior, technical cursor work or owner-domain retention.
+
+**Revisit when**
+
+A demonstrated tenant-admin lifecycle job establishes a safe, authorized reason
+to archive, remove or reactivate a Customer relationship.
