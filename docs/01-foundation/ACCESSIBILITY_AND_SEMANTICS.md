@@ -245,7 +245,7 @@ Dark mode is not a color inversion operation.
 
 The prototype should demonstrate accessibility-relevant behavior for the question being tested.
 
-At minimum for the Users reference domain, prototype behavior should show:
+At minimum for the Customers reference domain, prototype behavior should show:
 
 - semantic directory/list structure;
 - keyboard-reachable items and actions;

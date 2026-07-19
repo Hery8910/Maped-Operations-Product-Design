@@ -179,7 +179,8 @@ Until that domain is defined, avoid treating labels such as board, calendar or d
 
 ## Invitation and Access Workflow Baseline
 
-The Users reference domain demonstrates that invitation and active user are related but distinct entities/states.
+The Customers and Invitations definitions demonstrate that invitation and tenant
+customer relationship are related but distinct entities/states.
 
 Important product rules:
 

@@ -38,6 +38,14 @@ Legitimate configurable expression such as:
 
 Tenant branding must not break status meaning, focus visibility or operational hierarchy.
 
+### MVP tenant customization policy
+
+All tenants share the application shell, layout, components, responsive behavior
+and interaction patterns. The MVP permits only tenant name, logo, approved brand
+colors, visible modules, and authorized vocabulary/configuration. Tenant-specific
+layouts are not permitted. Semantic success, warning and error colors are product
+tokens, never tenant branding tokens.
+
 ---
 
 ## Dashboard Visual Direction
@@ -250,7 +258,7 @@ Components should be designed with semantic tokens from the beginning.
 
 The repository should not create a complete visual design system before solving real domains.
 
-The Users reference domain should be used to validate candidates such as:
+The Customers reference domain should be used to validate candidates such as:
 
 - application shell;
 - summary region;

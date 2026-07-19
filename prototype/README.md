@@ -7,8 +7,11 @@ turning this repository into a production frontend.
 
 It is not an implementation of the platform. It has no authentication, API
 client, database, application store, production routing, or backend contract.
-The Users interactions use intentionally local simulated state so documented
-loading, selection, invitation, feedback, and responsive states can be reviewed.
+The existing Users interactions use intentionally local simulated state. They
+are historical prototype evidence only: the current product authority is the
+Customers, Invitations and Internal Notes documentation. A later prototype task
+will align this workbench without treating its current routes or behavior as
+implementation authority.
 
 ## Run it
 
@@ -20,7 +23,8 @@ pnpm dev
 pnpm build
 ```
 
-`pnpm dev` serves the Users reference page at `/` and `/users`. `pnpm build`
+`pnpm dev` currently serves the historical Users reference page at `/` and
+`/users`. `pnpm build`
 produces a static prototype in `dist/`.
 
 ## Shell baseline

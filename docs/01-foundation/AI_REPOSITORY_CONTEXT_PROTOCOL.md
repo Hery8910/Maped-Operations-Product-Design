@@ -212,7 +212,7 @@ Surface: Product Design / Frontend / Backend / Cross-repository Integration
 Example:
 
 ```text
-Domain: Users
+Domain: Customers
 ```
 
 ### 3. Current Status
@@ -521,14 +521,14 @@ It should use them internally to avoid drift and only surface real ambiguities o
 
 ---
 
-## 12. Users Reference Context
+## 12. Customers Reference Context
 
-For current Users work, assume:
+For current Customers work, assume:
 
 ```text
-Domain: Users
-Current stage: PROTOTYPED
-Next gate: Visual and flow validation
+Domain: Customers
+Current stage: DEFINED
+Next gate: Customers prototype and visual/flow validation
 Not yet: IMPLEMENTATION_READY
 ```
 

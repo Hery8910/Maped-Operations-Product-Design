@@ -884,3 +884,69 @@ UI/API design inside Users v1.
 **Revisit when**
 
 New product evidence supports a named capability.
+
+---
+
+## D-025 — Replace Users v1 with Customers and separate shared capabilities
+
+- **Status:** Accepted
+- **Documented:** 2026-07-19
+- **Scope:** Customers, Invitations, Internal Notes and product map
+
+**Context**
+
+The former Users v1 definition mixed the tenant–customer relationship with
+global identity/access language and treated invitations and notes as local
+features. The revised operational job needs related Requests and Work Orders
+without taking ownership of those domains.
+
+**Decision**
+
+The operational page/domain is Customers, with canonical future route
+`/people/customers`; `/people/users` is legacy migration handling. Customers
+owns the tenant–customer relationship composition. Invitations is a reusable
+customer/worker/admin access capability and Internal Notes is a reusable
+customer/worker/admin internal annotation capability. Profile, Identity/Auth,
+Requests and Work Orders remain explicit dependencies.
+
+**Rationale**
+
+This names the actual operational relationship, prevents generic identity/admin
+scope from leaking into Customers and creates reusable boundaries without
+inventing future Worker/Admin experiences.
+
+**Consequences and trade-offs**
+
+The former Users documents/prototype remain evidence, not authority. Decisions
+D-003 and D-016 through D-024 are superseded wherever they define the former
+Users v1 scope; their durable principles apply through the new documents.
+
+**Revisit when**
+
+Validated evidence shows that the customer relationship boundary or a shared
+capability boundary no longer supports the operational jobs.
+
+---
+
+## D-026 — Keep tenant customization within shared operational patterns
+
+- **Status:** Accepted
+- **Documented:** 2026-07-19
+- **Scope:** Multi-tenant visual and interaction policy
+
+**Decision**
+
+All tenants share shell, layout, components, responsive behavior and interaction
+patterns. MVP customization is name, logo, approved brand colors, visible
+modules and authorized vocabulary/configuration. Tenant-specific layouts are
+not permitted; semantic error, warning and success colors remain product-owned.
+
+**Rationale**
+
+Reusable operational behavior and accessible status meaning must not fragment
+by tenant branding.
+
+**Revisit when**
+
+A validated cross-tenant requirement demonstrates a new shared pattern rather
+than a tenant-specific layout exception.

@@ -314,9 +314,9 @@ Status progression is a quality gate, not a one-way administrative ceremony.
 
 ---
 
-## 7. Current Reference Domain: Users
+## 7. Current Reference Domain: Customers
 
-Users is the first reference domain for this operating model.
+Customers is the current reference domain for this operating model.
 
 Its current baseline is:
 
@@ -324,30 +324,21 @@ Its current baseline is:
 Status: PROTOTYPED
 ```
 
-The domain currently has:
+The former Users prototype and audits remain historical evidence. The corrected
+Customers definition currently has:
 
-- corrected conceptual separation between global Auth identity and tenant-scoped access;
-- UserClient as tenant membership/access context;
-- Profile as personal customer data;
-- TenantUserInvitation as invitation lifecycle;
-- DirectoryEntry as a derived directory projection;
-- application shell;
-- semantic light and dark themes;
-- directory and inspector composition;
-- mobile focused-detail behavior;
-- accessible Invite Customer dialog;
-- prototype state controls;
-- invitation outcomes including:
-  - tenant access already exists;
-  - pending invitation;
-  - success;
-  - validation failure;
-  - pending/loading;
-  - service or delivery failure.
+- corrected separation of tenant–customer relationship, global Identity/Auth,
+  Profile, Invitations and Internal Notes;
+- approved directory/detail/form composition and narrow focused-detail model;
+- documented cross-domain read boundaries for Requests and Work Orders;
+- explicit backend/frontend verification gates.
 
-Users is not yet IMPLEMENTATION_READY.
+Customers is not yet PROTOTYPED or IMPLEMENTATION_READY. The previous Users
+prototype must be revised in a separate prototype task; it is not authority for
+the new Customers scope.
 
-The next product gate is visual and flow validation. After validation, the domain can be refined, then receive its Integration Contract and final implementation Handoff.
+The next product gate is Customers prototype and visual/flow validation, followed
+by contract verification for each implementation slice.
 
 ---
 

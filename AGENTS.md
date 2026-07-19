@@ -312,7 +312,16 @@ At the end of a task, report:
 
 The completion report should help the next person review the work without reconstructing the implementation process.
 
-# Codex Task — Establish the First Reviewable Product Baseline
+# Historical task note — superseded
+
+The following historical baseline task describes the former Users prototype. It
+is retained as implementation history only and is not current product authority.
+The active authority is `docs/02-domains/customers/`, with the separate
+`invitations/` and `internal-notes/` capability packages. Do not use the
+historical task below to reintroduce Users scope, modal invitation form, or
+deferred behavior.
+
+# Codex Task — Establish the First Reviewable Product Baseline (historical)
 
 ## Objective
 

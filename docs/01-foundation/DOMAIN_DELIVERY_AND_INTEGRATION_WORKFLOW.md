@@ -647,7 +647,7 @@ Reuse intentionally
 
 Do not create a large theoretical design system first.
 
-For the Users reference domain, likely candidates for later pattern extraction include:
+For the Customers reference domain, likely candidates for later pattern extraction include:
 
 - application shell;
 - summary and action region;
@@ -704,16 +704,15 @@ It should not duplicate the full product definition.
 
 ---
 
-## 14. Current Users Sequence
+## 14. Current Customers Sequence
 
-**Current status:** Users v1 — Assisted Customer Onboarding product definition
-is CURRENT. Slices A–E are PLANNED. Users v1 is an end-to-end capability, not
-an implementation slice, and is not IMPLEMENTATION_READY.
+**Current status:** Customers is DEFINED. Corrected slices are PLANNED;
+Customers is not PROTOTYPED or IMPLEMENTATION_READY.
 
 Current delivery sequence:
 
 ```text
-Users v1 product definition CURRENT
+Customers definition DEFINED
         ↓
 Cross-repository capability verification
         ↓
@@ -735,14 +734,14 @@ RETURN_TO_PRODUCT_REVISION
         ↓
 Proceed to the next slice
         ↓
-After Slices A–E and end-to-end validation:
-Users v1 PRODUCT_VALIDATED
+After all corrected slices and end-to-end validation:
+Customers PRODUCT_VALIDATED
 ```
 
 The prototype and audits remain evidence, not authority. Each slice must still
 be reviewed against:
 
-- Users domain definition;
+- Customers domain definition;
 - flows;
 - states and actions;
 - product notes;
@@ -752,5 +751,5 @@ be reviewed against:
 
 No slice enters implementation until it is IMPLEMENTATION_READY and has no
 blocker that would force rule invention. IMPLEMENTATION_READY is a
-pre-implementation gate, never a post-integration Users v1 status. Product
-definition CURRENT does not make every slice ready.
+pre-implementation gate, never a post-integration Customers status. Product
+definition does not make every slice ready.

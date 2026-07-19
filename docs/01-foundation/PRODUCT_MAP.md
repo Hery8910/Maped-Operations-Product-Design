@@ -116,21 +116,32 @@ tenant relationship. A person may already have a platform identity and still
 legitimately need access to a different tenant. That is not an account-exists
 conflict for the operator.
 
-### 2. Users and People
+### 2. Customers
 
-Current reference domain.
+Current reference domain for tenant–customer operations.
 
 Purpose:
 
-- find a person or invitation;
-- understand identity and access context;
-- inspect relevant operational relationships;
-- initiate contextual actions;
+- find a tenant customer or customer invitation;
+- understand relationship, confirmed Profile and invitation context;
+- inspect read-only Requests and Work Orders context;
+- maintain approved internal Notes;
 - preserve navigation context between directory and detail.
 
-The unresolved relationship between user identity and broader customer/client concepts must remain explicit until product analysis closes it.
+Customers is not a global identity directory. Identity/Auth and the reusable
+Invitations lifecycle remain separate capabilities.
 
-### 3. Service Requests
+### 3. Invitations
+
+Purpose:
+
+- create and manage tenant-scoped invitation lifecycle;
+- support customer, worker and admin access kinds without duplicating lifecycle
+  rules in each relationship domain;
+- preserve opaque credential, delivery, expiry, resend, renewal, revoke,
+  acceptance, cooldown and audit boundaries.
+
+### 4. Service Requests
 
 Purpose:
 
@@ -143,7 +154,7 @@ Observed evidence supports structured requests rather than a single generic free
 
 The full post-submission lifecycle remains a product definition task.
 
-### 4. Properties and Work Locations
+### 5. Properties and Work Locations
 
 Purpose:
 
@@ -153,7 +164,7 @@ Purpose:
 
 Current maturity: conceptually important, but operational UI authority is not established by placeholder routes alone.
 
-### 5. Scheduling
+### 6. Scheduling
 
 Purpose:
 
@@ -164,7 +175,7 @@ Purpose:
 
 Scheduling must not be reduced to a calendar view. Calendar, board and timeline are representations of scheduling problems, not the domain itself.
 
-### 6. Workforce Management
+### 7. Workforce Management
 
 Purpose:
 
@@ -174,7 +185,7 @@ Purpose:
 
 Current maturity: product candidate with strong strategic relevance, but detailed workflows require domain analysis.
 
-### 7. Communication
+### 8. Communication
 
 Purpose:
 
@@ -184,7 +195,15 @@ Purpose:
 
 Communication should not become a disconnected inbox if operational context is required to understand the conversation.
 
-### 8. Notifications and Attention
+### 9. Internal Notes
+
+Purpose:
+
+- retain internal operational annotations associated with customer, worker or
+  admin contexts;
+- keep these notes distinct from Profile data and customer-facing communication.
+
+### 10. Notifications and Attention
 
 Purpose:
 
@@ -198,7 +217,7 @@ Events and RSVP share platform infrastructure in current backend evidence, but
 have no demonstrated relationship to the Home Services operational product.
 They are not part of the current operational navigation baseline.
 
-### 9. Company Operations
+### 11. Company Operations
 
 Purpose:
 
@@ -209,7 +228,7 @@ Purpose:
 
 Company settings must remain distinct from a specific admin's personal account preferences.
 
-### 10. Catalog and Service Definition
+### 12. Catalog and Service Definition
 
 Purpose:
 
@@ -258,13 +277,14 @@ Tenant
 
 ### Active reference domain
 
-Users.
+Customers.
 
-### Immediate connections after the Users foundation
+### Immediate connections after the Customers foundation
 
-- person → contextual requests;
-- person → communication MVP;
-- person → internal notes.
+- customer → Requests read projection;
+- customer → Work Orders read projection;
+- customer → Internal Notes;
+- customer → reusable Invitations lifecycle.
 
 ### Important unresolved product connections
 
