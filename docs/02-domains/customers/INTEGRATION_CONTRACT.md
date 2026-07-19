@@ -30,6 +30,9 @@ cursor, selection and reconciliation; it does not define endpoint or encoding.
 provenance, explicit confirmation evidence, invalidation and legacy outcomes;
 `CUSTOMER_PROFILE_CONFIRMATION_GATE.md` authorizes the required persisted change
 with conditions, but neither chooses its schema nor authorizes implementation.
+`CUSTOMER_RELATIONSHIP_DOMAIN_CHANGE_GATE.md` approves a dedicated
+CustomerRelationship authority and conservative legacy cutover; no `UserClient`
+status may be mapped to lifecycle or grant.
 `../invitations/CUSTOMER_ACCESS_LIFECYCLE_CONTRACT.md` fixes customer-access
 Invitation lifecycle, delivery failure, recovery and Action required; it does
 not define command or token transport.

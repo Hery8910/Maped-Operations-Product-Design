@@ -22,6 +22,9 @@ The relationship policy is fixed in `RELATIONSHIP_LIFECYCLE_CONTRACT.md`:
 operational/archived/removed/unknown lifecycle, relationship grant, global
 Identity/Auth safety and tenant availability are independent projections. Normal
 directory rows/counts/search include operational relationships only.
+The next backend unit must implement the dedicated relationship authority and
+gates in `CUSTOMER_RELATIONSHIP_DOMAIN_CHANGE_GATE.md`; it must not treat
+`UserClient.status` as lifecycle/grant, nor absorb query, summaries or UI scope.
 
 The read-projection policy is fixed in
 `READ_PROJECTION_AUTHORIZATION_CONTRACT.md`: authorize actor/tenant/module

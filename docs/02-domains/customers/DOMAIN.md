@@ -12,6 +12,7 @@ domains.
 and `../internal-notes/DOMAIN.md`; `PROFILE_CONTRACT.md`,
 `CUSTOMER_PROFILE_CONFIRMATION_CONTRACT.md`,
 `CUSTOMER_PROFILE_CONFIRMATION_GATE.md`,
+`CUSTOMER_RELATIONSHIP_DOMAIN_CHANGE_GATE.md`,
 `RELATIONSHIP_LIFECYCLE_CONTRACT.md`,
 `READ_PROJECTION_AUTHORIZATION_CONTRACT.md`, `SUMMARY_CONTRACT.md`,
 `DIRECTORY_QUERY_CONTRACT.md`, `CUSTOMERS_V1_CONVERGENCE_PLAN.md` and
@@ -167,8 +168,10 @@ implementation-ready.
 
 The Customer relationship lifecycle, directory inclusion, tenant-access and
 global-security separation policy is closed in
-`RELATIONSHIP_LIFECYCLE_CONTRACT.md`. Its mapping to backend/tenant lifecycle
-and authorization projections remains open and does not make a slice ready.
+`RELATIONSHIP_LIFECYCLE_CONTRACT.md`. The required dedicated persisted authority,
+legacy/cutover policy and runtime gates are canonical in
+`CUSTOMER_RELATIONSHIP_DOMAIN_CHANGE_GATE.md`; `UserClient.status` has no direct
+product mapping. Its backend mapping remains open and does not make a slice ready.
 
 The Customers read projection, field authorization, freshness and opaque-denial
 policy is closed in `READ_PROJECTION_AUTHORIZATION_CONTRACT.md`; backend/frontend

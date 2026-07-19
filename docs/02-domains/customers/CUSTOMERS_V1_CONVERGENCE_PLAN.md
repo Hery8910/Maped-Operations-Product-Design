@@ -38,6 +38,8 @@ Canonical sources: Customer boundary/lifecycle in
 `PROFILE_CONTRACT.md`; Profile provenance/confirmation and its Domain Change
 Gate in `CUSTOMER_PROFILE_CONFIRMATION_CONTRACT.md` and
 `CUSTOMER_PROFILE_CONFIRMATION_GATE.md`; query/cursor behavior in `DIRECTORY_QUERY_CONTRACT.md`;
+the dedicated relationship authority and conservative cutover in
+`CUSTOMER_RELATIONSHIP_DOMAIN_CHANGE_GATE.md`;
 summary populations in `SUMMARY_CONTRACT.md`; and customer-access Invitation
 lifecycle/Action required in
 `../invitations/CUSTOMER_ACCESS_LIFECYCLE_CONTRACT.md`. Handoffs link, rather
@@ -47,7 +49,7 @@ than duplicate or reinterpret, these definitions.
 
 | # | Unit / owner repository | Scope and explicit exclusion | Dependencies, risks and Domain Change Gate | Evidence / closure criterion | Unblocks |
 | --- | --- | --- | --- | --- | --- |
-| 1 | **Backend authorization and lifecycle separation** — backend | Small first runtime unit: primary Customers authorization envelope and derived relationship lifecycle, grant, global safety and tenant availability. **Out:** Directory, summaries, Invitation UI, query/cursor, Profile projection and routes. | Product contracts; risk of cross-tenant inference or silently mapping `inactive`. **Gate:** authorization, persisted-state semantics and compatibility assessment. | Role/super-admin scope, cross-tenant/direct-ID opaque denial, lifecycle permutations and stale-envelope tests. Close only when authorization precedes every source and legacy statuses have no implied product mapping. | 2, 3, 4, 5, 6 |
+| 1 | **Backend CustomerRelationship authority and authorization boundary** — backend | Dedicated tenant-scoped relationship identity, lifecycle, grant, origin/reconciliation, audit and conservative legacy behavior; primary authorization envelope derives from this authority plus separate Auth/Tenant facts. **Out:** Directory, summaries, Invitation UI, query/cursor, Profile projection and routes. | `CUSTOMER_RELATIONSHIP_DOMAIN_CHANGE_GATE.md`; risk of cross-tenant inference, duplicate reconciliation or silently mapping `UserClient.status`. **Gate:** persisted authority, tenant uniqueness, authorization and cutover assessment. | Role/super-admin scope, cross-tenant/direct-ID opaque denial, create/reconcile/idempotency, lifecycle/grant permutations, legacy-unknown and stale-envelope tests. Close only when authorization precedes every source and no legacy status implies lifecycle/grant. | 2, 3, 4, 5, 6 |
 | 2 | **Backend authorized Customer/Profile projection** — backend | Authorized row/detail envelope: current email, Profile context, confirmation result and block outcomes. **Out:** admin Profile CRUD, query endpoint, summary calculation and owner-domain tabs. | Unit 1; Profile owner/read mapping. Risk: PII/data compatibility. **Gate:** Profile/read authorization and data evolution. | Customer/admin redaction and absent/unconfirmed/confirmed/unknown/restricted/unavailable/freshness tests. Close only when Profile creation never implies confirmation. | 3, 5, 6, 10 |
 | 3 | **Customer Profile confirmation evidence and customer-owned save flow** — backend + Client/Profile frontend | Persist Profile revision/field provenance and explicit customer review/save evidence; customer-owned correction, no-change save, conflict and resume flow. **Out:** tenant-admin Profile editing, acceptance implementation, schema/property naming, legacy migration campaign and section confirmation. | Units 1–2; `CUSTOMER_PROFILE_CONFIRMATION_GATE.md`. Risk: false confirmation, privacy leakage and concurrent unseen writes. Invitations lifecycle may advance in parallel, but acceptance/materialization cannot claim confirmation. | Revision/provenance, explicit/no-change save, third-party invalidation, contract-version renewal, concurrent conflict, legacy unknown, anonymization and non-confirming Invitation tests. Close only when every current confirmed result has valid evidence. | 5, 6, 7, 10 |
 | 4 | **Invitations lifecycle, delivery outcomes and recovery** — backend / Invitations | Customer-access lifecycle, persisted delivery failure, recovery eligibility, identity reconciliation and semantic outcomes. **Out:** provider, token/URL encoding, cooldown duration, audit storage and frontend form. | Unit 1; may run parallel to 2–3 except shared proposal/non-confirmation rules. Risk: credential/lifecycle concurrency. **Gate:** transition security, idempotency/concurrency and compatibility. | Create/pre-persistence failure/persisted delivery failure, expiry, resend/renew/revoke, concurrent acceptance and duplicate relationship tests. Close only when Action-required population is authoritative or safely non-ready. | 5, 6, 8, 10 |
@@ -61,8 +63,9 @@ than duplicate or reinterpret, these definitions.
 
 ## Sequencing rules
 
-- Unit 1 is the **only first runtime unit authorized now**. It does not
-  implement Directory, summaries, Invitations UI or final Customers query.
+- Unit 1 is the **only first runtime unit authorized now**. It creates the
+  dedicated relationship authority but does not implement Directory, summaries,
+  Invitations UI or final Customers query.
 - A unit may prepare evidence/docs but may not absorb a later unit to make a
   screen appear complete.
 - Backend/frontend audits remain evidence until closure tests prove the Product

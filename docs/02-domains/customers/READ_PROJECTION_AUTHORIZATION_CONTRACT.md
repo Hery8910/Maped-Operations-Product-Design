@@ -3,7 +3,7 @@
 **Status:** CURRENT — product and architecture gate closed; implementation mapping remains open.
 **Authority:** Authorized read projections, field minimization, freshness and non-disclosing read outcomes for Customers.
 **Last reviewed:** 2026-07-19
-**Related:** `DOMAIN.md`, `PROFILE_CONTRACT.md`, `RELATIONSHIP_LIFECYCLE_CONTRACT.md`, `INTEGRATION_CONTRACT.md`, `BACKEND_HANDOFF.md`, `FRONTEND_HANDOFF.md`, `VALIDATION_CHECKLIST.md`.
+**Related:** `DOMAIN.md`, `PROFILE_CONTRACT.md`, `RELATIONSHIP_LIFECYCLE_CONTRACT.md`, `CUSTOMER_RELATIONSHIP_DOMAIN_CHANGE_GATE.md`, `INTEGRATION_CONTRACT.md`, `BACKEND_HANDOFF.md`, `FRONTEND_HANDOFF.md`, `VALIDATION_CHECKLIST.md`.
 
 ## Scope and primary rule
 
@@ -106,7 +106,7 @@ Lifecycle, access grant/effective access, global restriction, tenant availabilit
 
 ## Evidence mapping and incompatibilities
 
-Verified evidence: `protectClient` limits ordinary tenant access; Auth email is global; `UserClient(authId, clientId)` is tenant-unique; Profile contains name/telephone/language/addresses; DirectoryEntry is derived/materialized; admin dashboard has directory/summary/detail evidence; public capability is sanitized bootstrap/auth/invitation only.
+Verified evidence: `protectClient` limits ordinary tenant access; Auth email is global; `UserClient(authId, clientId)` is tenant-unique infrastructure evidence; Profile contains name/telephone/language/addresses; DirectoryEntry is derived/materialized; admin dashboard has directory/summary/detail evidence; public capability is sanitized bootstrap/auth/invitation only. `UserClient` does not establish Customer lifecycle/grant authority.
 
 Partial evidence: technical super-admin bypass exists without approved support-read policy; Profile is holder-private while this contract requires least-necessary admin projection; refresh is manually/eventually consistent; current directory includes request/activity/next-visit data outside this contract.
 

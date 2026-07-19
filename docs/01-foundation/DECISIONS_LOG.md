@@ -1264,3 +1264,48 @@ endpoint, migration campaign, acceptance implementation or Profile UI is chosen.
 
 A validated customer task requires section-specific confirmation or a legal
 contract introduces separate consent evidence.
+
+---
+
+## D-034 — Make CustomerRelationship the dedicated lifecycle and grant authority
+
+- **Status:** Accepted with implementation gates
+- **Documented:** 2026-07-19
+- **Scope:** Tenant–Customer relationship identity, lifecycle, grant,
+  reconciliation and legacy cutover
+
+**Context**
+
+The lifecycle authority audit established that shared `UserClient.status` mixes
+technical access, onboarding and infrastructure across customers, workers and
+admins. Neither `active` nor any legacy status proves Customer lifecycle or
+relationship grant.
+
+**Decision**
+
+Customers will use a dedicated tenant-scoped CustomerRelationship as the
+persisted authority for stable identity, lifecycle, relationship grant, origin
+and Invitation reconciliation. `UserClient` remains technical infrastructure;
+Auth safety and tenant availability remain independent inputs to derived access.
+Legacy data receives no automatic status-based backfill. The first runtime unit
+is the relationship authority, its authorization boundary and conservative
+cutover evidence, not a Directory/read projection.
+
+**Rationale**
+
+This gives Customers an auditable, tenant-safe relationship model without
+overgeneralizing Customer/Worker/Admin semantics or inventing certainty from
+legacy records.
+
+**Consequences and trade-offs**
+
+Implementation must prove tenant uniqueness, concurrent reconciliation, opaque
+denial, archive/remove retention behavior and a migration inventory/cutover
+decision. Existing Customer projections stay unknown until backed by the new
+authority. No schema name, endpoint, migration execution, UI action or frontend
+work is authorized by this decision alone.
+
+**Revisit when**
+
+Evidence demonstrates a truly shared cross-domain relationship lifecycle with
+compatible ownership, transitions and migration needs.

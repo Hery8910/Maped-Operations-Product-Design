@@ -13,6 +13,10 @@
   availability are independently represented; unknown is never treated as zero.
 - [ ] `inactive` has no assumed product mapping. Restricted access, archived/
   removed relationship and tenant unavailability do not create Action required.
+- [ ] Lifecycle/grant come only from the dedicated relationship authority;
+  `UserClient.status`, email, Profile and Invitation acceptance are never used
+  as legacy fallbacks. Tenant-scoped uniqueness, reconciliation and cutover
+  evidence satisfy `CUSTOMER_RELATIONSHIP_DOMAIN_CHANGE_GATE.md`.
 - [ ] Only authorized tenant admins (or explicitly audited super-admin scope)
   receive a tenant projection. Primary denial has no row/detail/count/search or
   resource-existence signal; secondary source denial is distinct restricted.

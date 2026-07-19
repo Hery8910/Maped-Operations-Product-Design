@@ -7,10 +7,12 @@ directory-inclusion semantics.
 **Related:** `DOMAIN.md`, `PROFILE_CONTRACT.md`, `STATES_AND_ACTIONS.md`,
 `FLOWS.md`, `INTEGRATION_CONTRACT.md`, `BACKEND_HANDOFF.md`,
 `FRONTEND_HANDOFF.md`, `IMPLEMENTATION_PLAN.md`, `VALIDATION_CHECKLIST.md`.
+The persisted authority, alternative assessment and conservative legacy cutover
+are canonical in `CUSTOMER_RELATIONSHIP_DOMAIN_CHANGE_GATE.md`.
 
 ## Decision
 
-A Customer relationship is a tenant-scoped operational record. Its existence
+A Customer relationship is a dedicated tenant-scoped operational record. Its existence
 and lifecycle, tenant-access grant, global Identity/Auth safety, and tenant
 lifecycle are different facts with different owners. None may be inferred by
 renaming another fact's status.
@@ -130,6 +132,10 @@ Profile incomplete, tenant lifecycle state, global restriction or Action
 required. This is an implementation incompatibility, not a migration request.
 
 ## Open implementation mapping gates
+
+The next implementation may use only the dedicated persisted authority approved
+by `CUSTOMER_RELATIONSHIP_DOMAIN_CHANGE_GATE.md`; it may not extend or infer
+Customer semantics from `UserClient`.
 
 - Verify relationship identity/lifecycle and a safe mapping for archive/remove
   without adopting current model names as product names.

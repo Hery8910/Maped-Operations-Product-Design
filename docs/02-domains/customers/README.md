@@ -9,6 +9,7 @@ separate reusable capabilities, integrated here through their contracts.
 - [Profile provenance and confirmation contract](CUSTOMER_PROFILE_CONFIRMATION_CONTRACT.md)
 - [Profile confirmation Domain Change Gate](CUSTOMER_PROFILE_CONFIRMATION_GATE.md)
 - [Relationship lifecycle contract](RELATIONSHIP_LIFECYCLE_CONTRACT.md)
+- [Relationship Domain Change Gate](CUSTOMER_RELATIONSHIP_DOMAIN_CHANGE_GATE.md)
 - [Read projection and authorization contract](READ_PROJECTION_AUTHORIZATION_CONTRACT.md)
 - [Summary populations and freshness contract](SUMMARY_CONTRACT.md)
 - [Directory query and cursor contract](DIRECTORY_QUERY_CONTRACT.md)
