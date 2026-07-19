@@ -143,6 +143,11 @@ The output should define required capability and identify gaps.
 
 It should not become a backend architecture redesign document.
 
+For Customers read work, also load the Customer ↔ Profile, relationship lifecycle
+and read-projection authorization contracts. Treat primary tenant authorization
+as the boundary before field/source analysis; audits cannot justify a global
+identity lookup or partial response after denial.
+
 ### E. Frontend Implementation Task
 
 Load:

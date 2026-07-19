@@ -1038,3 +1038,45 @@ commands, delivery behavior, technical cursor work or owner-domain retention.
 
 A demonstrated tenant-admin lifecycle job establishes a safe, authorized reason
 to archive, remove or reactivate a Customer relationship.
+
+---
+
+## D-029 — Use a minimized authorized Customers read projection
+
+- **Status:** Accepted
+- **Documented:** 2026-07-19
+- **Scope:** Customers directory/detail read architecture and authorization
+
+**Context**
+
+Customers needs contact and Profile context for an authorized tenant admin, but
+the underlying identity is global, Profile evidence is currently holder-private
+and existing directory evidence carries more request/activity context than the
+approved MVP requires.
+
+**Decision**
+
+Customers reads a tenant-scoped, field-minimized projection only after actor,
+tenant, module and relationship authorization succeeds. Rows contain selection
+reference, label/fallback, current approved email, completeness, lifecycle,
+effective access and necessary read indicators; telephone, locale and addresses
+stay out of rows. Overview loads relationship, Profile/contact, addresses and
+access context as independent blocks. Primary denial is opaque; partial is only
+allowed after a current authorized relationship envelope succeeds.
+
+**Rationale**
+
+This provides the operational recognition/context job while preventing global
+identity inference, unnecessary PII exposure and misleading partial states.
+
+**Consequences and trade-offs**
+
+Implementation must map field-level authorization, freshness, redaction and
+non-disclosing errors. Super-admin technical bypass does not itself authorize
+global reading. No endpoint, cursor, summary, cache technology or invitation
+lifecycle decision is created.
+
+**Revisit when**
+
+Another validated actor has a distinct Customers operational job, or a field
+proves necessary for the row rather than authorized detail context.

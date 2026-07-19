@@ -5,7 +5,7 @@
 
 | Slice | Scope | Status | Gates before implementation-ready |
 | --- | --- | --- | --- |
-| Customers Directory and Overview | tenant relationship directory, summaries, search, filters, selection, Profile/address read view | PLANNED | **Product policy closed:** Profile and relationship lifecycle/access semantics. Still verify tenant projection/cursor, lifecycle/grant/global/tenant mapping, counter populations, Profile confirmation/source/freshness/read authorization |
+| Customers Directory and Overview | tenant relationship directory, summaries, search, filters, selection, Profile/address read view | PLANNED | **Product policy closed:** Profile, lifecycle/access and read authorization/freshness semantics. Still verify tenant projection/cursor, field-level enforcement, counter populations, Profile source/freshness and opaque-denial behavior |
 | Shared Invitation Creation | customer invitation form in right panel; proposal/data ownership and outcomes | PLANNED | common Invitations command, locale, idempotency, conflict/delivery identity, permissions |
 | Customer Acceptance and Profile Completion | new/existing identity acceptance, review/correct/save and interrupted resume | PLANNED | identity/auth, opaque credential, Profile merge/ownership, resume and reconciliation |
 | Invitation Lifecycle Recovery | resend, renew-and-resend, cooldown, revoke and reconciliation | PLANNED | lifecycle transitions, token rotation, audit, cooldown, authorization |

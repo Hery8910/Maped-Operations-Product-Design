@@ -10,7 +10,8 @@ domains.
 `INTEGRATION_CONTRACT.md`, `BACKEND_HANDOFF.md`, `FRONTEND_HANDOFF.md`,
 `IMPLEMENTATION_PLAN.md`, `VALIDATION_CHECKLIST.md`; `../invitations/DOMAIN.md`
 and `../internal-notes/DOMAIN.md`; `PROFILE_CONTRACT.md`,
-`RELATIONSHIP_LIFECYCLE_CONTRACT.md`.
+`RELATIONSHIP_LIFECYCLE_CONTRACT.md`,
+`READ_PROJECTION_AUTHORIZATION_CONTRACT.md`.
 
 ## Purpose
 
@@ -32,6 +33,10 @@ a future migration redirect only; it is not a second product surface.
 Every visible field, summary, filter, tab and action must state its operational
 job, source, freshness, fallback, authorization and responsive/error behavior.
 Existing models, routes or prototype controls are evidence only.
+
+Customers reads only the authorized, minimized tenant projection defined in
+`READ_PROJECTION_AUTHORIZATION_CONTRACT.md`; source records are not client-side
+directory data and a failed authorization never returns a partial projection.
 
 Customers owns the directory composition and customer relationship context. It
 does not own Profile, Identity/Auth, Invitations, Service Requests, Work Orders
@@ -152,6 +157,10 @@ The Customer relationship lifecycle, directory inclusion, tenant-access and
 global-security separation policy is closed in
 `RELATIONSHIP_LIFECYCLE_CONTRACT.md`. Its mapping to backend/tenant lifecycle
 and authorization projections remains open and does not make a slice ready.
+
+The Customers read projection, field authorization, freshness and opaque-denial
+policy is closed in `READ_PROJECTION_AUTHORIZATION_CONTRACT.md`; backend/frontend
+mapping and enforcement verification remain open.
 
 Remaining gates:
 

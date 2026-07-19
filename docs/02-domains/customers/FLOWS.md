@@ -17,6 +17,9 @@ search-empty, filter-empty and unavailable data have distinct explanations and
 recovery. Selection loads in the right panel without replacing the directory.
 Only operational relationships are normal Customer rows; a restricted access
 result does not remove a known relationship or create Action required.
+If primary tenant authorization fails, the flow returns an opaque denial rather
+than a partial row/detail; independently unavailable Profile blocks can be
+partial only after authorized relationship context is established.
 
 ## 2. Search, filter, paginate and select
 

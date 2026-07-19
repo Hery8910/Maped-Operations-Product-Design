@@ -134,6 +134,8 @@ Invitations lifecycle remain separate capabilities.
 Customer relationship lifecycle, tenant access grant, global Identity/Auth
 safety and tenant lifecycle availability are distinct. A tenant becoming
 unavailable must not silently archive or remove its Customer relationships.
+Customers exposes these only through least-necessary authorized tenant
+projections; no Customer surface may become a global identity lookup.
 
 ### 3. Invitations
 

@@ -25,6 +25,9 @@ modal. Right detail supports Customer, Invitation and Invite states.
 - Normal Customers directory/count/search include operational relationships
   only; restricted/unknown access remains an informational/restricted result,
   not a different relationship row or Action required.
+- Customer rows exclude telephone, locale, addresses and owner-domain context.
+  Overview loads identity, Profile/contact, addresses and access context as
+  independently visible blocks only after tenant authorization succeeds.
 
 ## State, URL and responsive behavior
 
@@ -39,6 +42,9 @@ must not be styled or counted as incomplete.
 Do not treat current implementation `inactive` as a UI status. Show lifecycle,
 access, tenant-unavailable and global-restriction outcomes only when their
 contract mapping is verified; otherwise use unknown/unavailable safely.
+Do not expose raw global-security reasons, global IDs, tokens or source errors;
+use the stable read taxonomy and opacity rules in
+`READ_PROJECTION_AUTHORIZATION_CONTRACT.md`.
 
 ## Accessibility and branding
 

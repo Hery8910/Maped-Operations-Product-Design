@@ -22,6 +22,10 @@ Identity/Auth safety             ── owns global security restriction
 Tenant lifecycle                 ── owns whether the tenant can currently serve
 ```
 
+Read authorization, minimal access/global/tenant meaning and stale behavior are
+defined in `READ_PROJECTION_AUTHORIZATION_CONTRACT.md`; a relationship lifecycle
+or access result must not be exposed when its primary tenant scope is forbidden.
+
 ## Relationship lifecycle
 
 Only these lifecycle results are necessary for the Customers MVP:

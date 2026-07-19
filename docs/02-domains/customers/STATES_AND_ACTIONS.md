@@ -4,7 +4,8 @@
 **Authority:** Visible Customers state, action and composition authority.
 **Related:** `DOMAIN.md`, `FLOWS.md`, `../invitations/DOMAIN.md`,
 `../internal-notes/DOMAIN.md`, `PROFILE_CONTRACT.md`,
-`RELATIONSHIP_LIFECYCLE_CONTRACT.md`.
+`RELATIONSHIP_LIFECYCLE_CONTRACT.md`,
+`READ_PROJECTION_AUTHORIZATION_CONTRACT.md`.
 
 ## Directory and summary states
 
@@ -56,7 +57,9 @@ Every consequential action is `idle → pending → success | error`; pending
 prevents duplicate submission. Validation stays with the field/action that can
 be corrected. Recoverable failures preserve form input and selection context.
 Permission-denied states explain the unavailable capability without exposing
-restricted data. Module-disabled states explain that the section is not enabled
+restricted data. `forbidden` has no partial data or resource-existence signal;
+`restricted` may occur only after authorized relationship scope succeeds;
+`unavailable`, `unknown`, `not found` and `stale` remain distinct. Module-disabled states explain that the section is not enabled
 for this tenant and do not substitute a zero result.
 
 ## Allowed action matrix

@@ -13,6 +13,9 @@
   availability are independently represented; unknown is never treated as zero.
 - [ ] `inactive` has no assumed product mapping. Restricted access, archived/
   removed relationship and tenant unavailability do not create Action required.
+- [ ] Only authorized tenant admins (or explicitly audited super-admin scope)
+  receive a tenant projection. Primary denial has no row/detail/count/search or
+  resource-existence signal; secondary source denial is distinct restricted.
 - [ ] Summary populations are tenant-wide and Action required is only
   delivery-failed/expired invitations.
 - [ ] Profile result is exactly complete, incomplete or unknown. Complete requires
@@ -27,6 +30,11 @@
   error/retry, loading-more/end and selected load/error/stale all work.
 - [ ] Overview shows authorized current-email projection, Profile, all addresses
   and deterministic completeness/reasons without tenant-admin editing.
+- [ ] Customer rows contain only minimum references, label, email, completeness,
+  lifecycle/access and read indicators; telephone/locale/addresses are excluded.
+- [ ] Overview allows partial Profile/address blocks only after current primary
+  authorization. Lifecycle/access/security/tenant context and addresses obey
+  the documented never-stale rules.
 - [ ] Requests/Work Orders are hidden when disabled and otherwise offer only
   authorized paginated read projection plus owner-domain navigation.
 - [ ] Note list/create/edit/archive behavior satisfies internal-only access,

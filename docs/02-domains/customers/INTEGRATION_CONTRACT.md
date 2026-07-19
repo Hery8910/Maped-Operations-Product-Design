@@ -20,11 +20,14 @@ relationship grant, global Identity/Auth safety and tenant availability must be
 mapped separately. Current backend `UserClient.inactive` is not a product status
 mapping and must return an appropriate unknown access result until verified.
 
+`READ_PROJECTION_AUTHORIZATION_CONTRACT.md` fixes the minimum authorized read
+shape, field-level minimization, freshness and non-disclosing outcome taxonomy.
+
 ## Required read contracts
 
 | Need | Required semantics | Gate |
 | --- | --- | --- |
-| Directory | tenant-scoped cursor projection; operational Customer relationships plus separate invitations; name/email/telephone search; Customers/Invitations/Action-required filters | cursor ordering, lifecycle inclusion, access/status projection and authorization verification |
+| Directory | tenant-scoped minimized Customer row plus separate Invitation row; authorized name/email search and telephone matching; no address/owner-domain data | cursor ordering, field projection, freshness and authorization verification |
 | Summary | tenant-wide Customers, Profiles complete (`complete` only), pending invitations and action-required counts; independent freshness/loading/error | exact population and Profile result mapping/freshness |
 | Customer Overview | current email projection, confirmed Profile, all confirmed addresses and `complete`/`incomplete`/`unknown` result with deterministic reasons; source/fallback/freshness per field | authorized Profile read projection and confirmation/freshness mapping |
 | Invitation detail | lifecycle state, delivery meaning and permitted action availability | Invitations lifecycle projection |
@@ -34,6 +37,10 @@ mapping and must return an appropriate unknown access result until verified.
 Selection must tolerate detail loading, unavailable/stale entries and changed
 cursor data without presenting stale data as current. A denied read must not
 reveal partial tenant data.
+
+Overview loads relationship envelope, contact/Profile, addresses and access
+context as separate blocks; only Profile/address blocks may be partial after a
+current authorization envelope succeeds.
 
 ## Required command/outcome contracts
 
@@ -84,8 +91,12 @@ whether archive is reversible; these remain gates until verified.
 5. **Product gate closed:** map relationship lifecycle, grant, global security,
    tenant availability, accepted-invitation reconciliation and duplicate conflict
    behavior independently; current `inactive` semantics must not be guessed.
-6. Verify Invitations lifecycle, cooldown, delivery outcome identity, audit and
+6. **Product gate closed:** map actor/tenant/module authorization, field-level
+   redaction, independent Overview blocks, freshness/invalidation and opaque
+   `not found`/`forbidden` behavior. This does not close cursor, search or
+   summaries.
+7. Verify Invitations lifecycle, cooldown, delivery outcome identity, audit and
    reconciliation.
-7. Verify owner-domain read projections and pagination for Requests/Work Orders.
-8. Verify Internal Notes authorization, retention/archive semantics, authorship
+8. Verify owner-domain read projections and pagination for Requests/Work Orders.
+9. Verify Internal Notes authorization, retention/archive semantics, authorship
    and audit expectations.

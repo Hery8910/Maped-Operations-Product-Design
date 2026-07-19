@@ -22,6 +22,12 @@ operational/archived/removed/unknown lifecycle, relationship grant, global
 Identity/Auth safety and tenant availability are independent projections. Normal
 directory rows/counts/search include operational relationships only.
 
+The read-projection policy is fixed in
+`READ_PROJECTION_AUTHORIZATION_CONTRACT.md`: authorize actor/tenant/module
+before resolving any source; return minimized separate Customer/Invitation rows;
+allow partial only after a current authorized relationship envelope; and make
+cross-tenant/not-authorized responses non-disclosing.
+
 ## Required capabilities
 
 - Authorized cursor directory query with name/email/telephone search and the
@@ -29,6 +35,9 @@ directory rows/counts/search include operational relationships only.
 - Relationship lifecycle/access projection with stable relationship identity,
   lifecycle result, independent grant/global/tenant availability outcome and
   safe unknown/stale behavior.
+- Field-level projection/redaction for email, telephone, locale, addresses,
+  Profile completeness and minimum access/security/tenant meaning, with sources
+  independently fresh only where policy allows.
 - Tenant-wide summary query with defined population/freshness for all four
   counters.
 - Stable detail queries for customer, invitation, Profile/addresses and enabled
@@ -60,3 +69,6 @@ to map, not permission to silently overwrite or grant broad Profile CRUD.
 Current `UserClient.inactive` has no approved mapping: verify whether it is an
 access-grant fact or other legacy evidence, but do not turn it into archive,
 removal, tenant suspension, invitation or Profile status.
+Verify whether existing `protectClient`, super-admin bypass, derived directory
+projection and source reads meet opaque denial, least-data and freshness rules;
+existing behavior is evidence, not an approved contract mapping.

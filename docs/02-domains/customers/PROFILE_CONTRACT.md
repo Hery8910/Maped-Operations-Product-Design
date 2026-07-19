@@ -20,6 +20,8 @@ The directory represents either an operational Customer relationship or a
 separate customer invitation. An invitation is not a Customer row before its
 accepted relationship is reconciled. Lifecycle, access and directory rules are
 defined in `RELATIONSHIP_LIFECYCLE_CONTRACT.md`.
+Read surfaces, redaction and freshness are defined in
+`READ_PROJECTION_AUTHORIZATION_CONTRACT.md`.
 
 ## Ownership and access matrix
 
@@ -114,6 +116,7 @@ endpoint, model or runtime change is authorized by this document.
 - Verify how Profile stores/proves customer confirmation, current name, locale,
   phone and all addresses; return `unknown` where a safe mapping is unavailable.
 - Define least-necessary tenant-admin Profile read authorization and projection
-  freshness without granting Profile write access.
+  freshness without granting Profile write access, according to the read
+  projection contract.
 - Service Requests must separately define Request eligibility and its relationship
   to Profile/address data. That gate is intentionally not closed here.
