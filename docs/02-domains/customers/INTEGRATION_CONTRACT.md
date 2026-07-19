@@ -26,6 +26,10 @@ shape, field-level minimization, freshness and non-disclosing outcome taxonomy.
 consistency and per-counter states; it does not define transport or queries.
 `DIRECTORY_QUERY_CONTRACT.md` fixes query populations, search semantics, order,
 cursor, selection and reconciliation; it does not define endpoint or encoding.
+`CUSTOMER_PROFILE_CONFIRMATION_CONTRACT.md` fixes customer-owned Profile
+provenance, explicit confirmation evidence, invalidation and legacy outcomes;
+`CUSTOMER_PROFILE_CONFIRMATION_GATE.md` authorizes the required persisted change
+with conditions, but neither chooses its schema nor authorizes implementation.
 `../invitations/CUSTOMER_ACCESS_LIFECYCLE_CONTRACT.md` fixes customer-access
 Invitation lifecycle, delivery failure, recovery and Action required; it does
 not define command or token transport.
@@ -36,7 +40,7 @@ not define command or token transport.
 | --- | --- | --- |
 | Directory | three mutually exclusive views, deterministic normalized search, stable label order, opaque scoped cursor and direct authorized selection | cursor/query/order/selection/reconciliation implementation and enforcement |
 | Summary | four tenant-wide populations with independent counter states, no cursor-derived calculation and coherent invariant review | calculation/transport, authoritative lifecycle/profile/invitation mappings and freshness enforcement |
-| Customer Overview | current email projection, confirmed Profile, all confirmed addresses and `complete`/`incomplete`/`unknown` result with deterministic reasons; source/fallback/freshness per field | authorized Profile read projection and confirmation/freshness mapping |
+| Customer Overview | current email projection, Profile v1 confirmation result, and `complete`/`incomplete`/`unknown` result with deterministic reasons; source/fallback/freshness per field | authorized Profile read projection and confirmation/freshness mapping |
 | Invitation detail | lifecycle state, delivery meaning and permitted action availability | Invitations lifecycle projection |
 | Related Requests / Work Orders | per-customer tenant-scoped cursor query, compact read-only fields, total and owner-page destination | each owner domain's query, authorization and destination |
 | Notes | customer-associated internal note projection and permitted edit/archive metadata | Internal Notes contract and least-access rule |
@@ -78,9 +82,11 @@ whether archive is reversible; these remain gates until verified.
   accepted records do not remain duplicate normal rows and revoked records leave
   the normal operational directory.
 - Profile confirmation belongs to the customer flow. Customer relationship,
-  invitation acceptance and tenant access do not imply Profile completion.
-  `PROFILE_CONTRACT.md` defines the informational result; Requests owns request
-  eligibility and may not be inferred from it.
+  invitation acceptance and tenant access do not imply Profile completion or
+  confirmation. `CUSTOMER_PROFILE_CONFIRMATION_CONTRACT.md` defines valid
+  evidence and legacy outcomes; `PROFILE_CONTRACT.md` defines the informational
+  completeness result. Requests owns request eligibility and may not be inferred
+  from either.
 - Tenant suspension/unavailability, global restriction and relationship lifecycle
   must not overwrite one another. Unavailability/restriction is not an implicit
   archive/remove or Action-required condition.

@@ -6,6 +6,8 @@ separate reusable capabilities, integrated here through their contracts.
 - [Flows](FLOWS.md)
 - [States and actions](STATES_AND_ACTIONS.md)
 - [Customer ↔ Profile contract](PROFILE_CONTRACT.md)
+- [Profile provenance and confirmation contract](CUSTOMER_PROFILE_CONFIRMATION_CONTRACT.md)
+- [Profile confirmation Domain Change Gate](CUSTOMER_PROFILE_CONFIRMATION_GATE.md)
 - [Relationship lifecycle contract](RELATIONSHIP_LIFECYCLE_CONTRACT.md)
 - [Read projection and authorization contract](READ_PROJECTION_AUTHORIZATION_CONTRACT.md)
 - [Summary populations and freshness contract](SUMMARY_CONTRACT.md)

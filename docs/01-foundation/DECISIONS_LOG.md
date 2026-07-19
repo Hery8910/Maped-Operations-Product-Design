@@ -1219,3 +1219,48 @@ Invitation UI, endpoint/schema, provider, migration or Profile CRUD.
 
 A demonstrated tenant-admin recovery job requires another invitation condition
 or a distinct product route that remains tenant-scoped and non-duplicative.
+
+---
+
+## D-033 — Require durable customer evidence for Profile confirmation
+
+- **Status:** Accepted
+- **Documented:** 2026-07-19
+- **Scope:** Customer Profile provenance, confirmation, legacy treatment and
+  Customer/Profile projection
+
+**Context**
+
+The Customer/Profile projection can represent Profile context, but legacy
+Profiles retain no proof that the customer reviewed, corrected or saved their
+contents. Profile existence, address data, prior access or Invitation acceptance
+would make a confirmation claim appear plausible without making it true.
+
+**Decision**
+
+Profile confirmation is a durable, explicit customer review/save event bound to
+the complete current Profile v1 revision and confirmation-contract version.
+Name and preferred locale retain field provenance; Invitation/admin/integration
+values remain proposals until a customer saves the shown revision. Any changed
+revision or changed contract invalidates current confirmation. Legacy Profile
+records without demonstrable equivalent proof are `unknown`, with no heuristic
+or administrative backfill. The persisted change is authorized with conditions
+by `CUSTOMER_PROFILE_CONFIRMATION_GATE.md`.
+
+**Rationale**
+
+This permits operationally honest Customer/Profile projections and completion
+summaries while preserving customer ownership, tenant isolation and the
+Invitation/relationship boundary.
+
+**Consequences and trade-offs**
+
+A customer-owned Profile save flow and revision/provenance evidence are required
+before a runtime can report `confirmed`. Directory rows gain no new attention
+state, and Action required remains Invitation recovery only. No schema,
+endpoint, migration campaign, acceptance implementation or Profile UI is chosen.
+
+**Revisit when**
+
+A validated customer task requires section-specific confirmation or a legal
+contract introduces separate consent evidence.

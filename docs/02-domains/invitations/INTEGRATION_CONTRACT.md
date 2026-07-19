@@ -14,6 +14,11 @@ authorization and idempotency guarantees. Verify delivery persistence identity,
 token rotation/invalidation, transactional behavior, rate limits, expiry policy,
 history retention and new/existing identity handling.
 
+For `customer_access`, proposal materialization and acceptance must preserve the
+source boundary in `../customers/CUSTOMER_PROFILE_CONFIRMATION_CONTRACT.md`:
+they may create an unconfirmed Profile revision with provenance, but may never
+create customer-confirmation evidence.
+
 Frontend must render lifecycle meaning and only the action legal for the state;
 pending blocks duplicate action, field errors are local, recoverable outcomes
 preserve input/context and revoke has confirmation/focus restoration. Initiating

@@ -11,11 +11,12 @@ Notes. Keep global identity/auth, Profile, Invitation lifecycle, Requests, Work
 Orders and Notes as separately owned concepts. Do not collapse them into a
 single `user` record or a `profileComplete` access status.
 
-The product policy is fixed in `PROFILE_CONTRACT.md`: global email/credentials
-remain Identity/Auth; Profile owns confirmed name, locale, optional telephone
-and addresses; relationship/access are separate; and Profile completeness is a
-three-result derivation. Backend work must map those concepts without choosing
-product-invented endpoint or schema names.
+The product policy is fixed in `PROFILE_CONTRACT.md` and
+`CUSTOMER_PROFILE_CONFIRMATION_CONTRACT.md`: global email/credentials remain
+Identity/Auth; Profile owns customer name and locale; customer review/save
+evidence is revision-scoped; relationship/access are separate; and Profile
+completeness is a three-result derivation. Backend work must map those concepts
+without choosing product-invented endpoint or schema names.
 
 The relationship policy is fixed in `RELATIONSHIP_LIFECYCLE_CONTRACT.md`:
 operational/archived/removed/unknown lifecycle, relationship grant, global

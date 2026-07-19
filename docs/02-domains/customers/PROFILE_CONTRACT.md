@@ -1,11 +1,14 @@
 # Customer ↔ Profile Contract and Completeness Policy
 
-**Status:** CURRENT — product and architecture gate closed; implementation mapping remains open.
+**Status:** CURRENT — completeness policy is closed; confirmation provenance is
+defined in `CUSTOMER_PROFILE_CONFIRMATION_CONTRACT.md`.
 **Authority:** Customer, Profile, identity and relationship ownership; derived
 completeness definitions.
 **Last reviewed:** 2026-07-19
 **Related:** `DOMAIN.md`, `STATES_AND_ACTIONS.md`, `INTEGRATION_CONTRACT.md`,
-`BACKEND_HANDOFF.md`, `FRONTEND_HANDOFF.md`, `VALIDATION_CHECKLIST.md`.
+`BACKEND_HANDOFF.md`, `FRONTEND_HANDOFF.md`, `VALIDATION_CHECKLIST.md`,
+`CUSTOMER_PROFILE_CONFIRMATION_CONTRACT.md` and
+`CUSTOMER_PROFILE_CONFIRMATION_GATE.md`.
 
 ## Decision
 
@@ -29,10 +32,10 @@ Read surfaces, redaction and freshness are defined in
 | --- | --- | --- | --- | --- |
 | Global identity ID, credentials, verification and global block | Identity/Auth | manages credentials through Identity/Auth flows | cannot read credentials or alter global identity state | resolves identity and enforces global safety; never copied into Customers |
 | Global email | Identity/Auth | may change only through Identity/Auth's verified change flow | may read the tenant-scoped directory/detail projection for contact/search; cannot edit | projection may expose current approved email with freshness/staleness meaning |
-| Confirmed customer name | Profile | creates/corrects/confirms | reads approved tenant-scoped Profile projection; cannot edit | source value, not a directory-owned copy |
-| Preferred locale | Profile | creates/corrects/confirms | reads when useful to understand customer context; cannot edit | used by customer-facing communication only through owning contracts |
-| Telephone | Profile | optional create/correct/remove | reads approved tenant-scoped Profile projection and may search it; cannot edit | absence is `not provided`, never incomplete by itself |
-| Confirmed addresses | Profile | create/correct/remove | reads all approved tenant-scoped addresses; cannot edit | all addresses are shown with source/freshness; no address is required for Profile completeness |
+| Customer name | Profile | creates/corrects and explicitly saves a revision | reads approved tenant-scoped Profile projection; cannot edit | source value, not a directory-owned copy; confirmation evidence/provenance is canonical in `CUSTOMER_PROFILE_CONFIRMATION_CONTRACT.md` |
+| Preferred locale | Profile | creates/corrects and explicitly saves a revision | reads when useful to understand customer context; cannot edit | used by customer-facing communication only through owning contracts; confirmation evidence/provenance is canonical in the confirmation contract |
+| Telephone | Profile | optional create/correct/remove | reads approved tenant-scoped Profile projection and may search it; cannot edit | absence is `not provided`, never incomplete by itself; outside Profile v1 confirmation scope |
+| Confirmed addresses | Profile | create/correct/remove | reads all approved tenant-scoped addresses; cannot edit | all addresses are shown with source/freshness; no address is required for Profile completeness or Profile v1 confirmation |
 | Profile operational completeness | Profile policy | sees explanation and completes own missing confirmation | reads informational result/reason; cannot change it | deterministic derived result below; unknown data is not incomplete |
 | Customer relationship ID and tenant association | Customers | may read own relationship where customer experience later permits | reads operational relationship projection | creates/reconciles through authorized lifecycle; stable tenant-scoped reference |
 | Tenant access entitlement | tenant relationship / Identity/Auth | receives access through approved acceptance/access flows | may read only approved access meaning; no generic access management in Customers | derived from separate grant, global safety and tenant availability; not `Profile` state |
@@ -54,7 +57,7 @@ not yet supported.
 | **Eligible to appear as Customer** | Relationship lifecycle is `operational` for the current tenant. | Profile existence, Profile completeness, telephone/address, Request/Work Order, invitation row or tenant access entitlement. |
 | **Invitation accepted** | The relevant customer invitation lifecycle is `accepted` and its reconciliation outcome is recorded. | Profile completion or continuing tenant access if later security policy prevents it. |
 | **Tenant access permitted** | Relationship is operational, tenant grant is approved, Identity/Auth allows access and tenant is serving. | Invitation row visibility, Profile completeness or Request eligibility. |
-| **Profile operationally complete** | A Profile exists; the customer has explicitly confirmed a non-empty customer name and a supported preferred locale. | Telephone, any address, tenant access or Request eligibility. |
+| **Profile operationally complete** | A Profile current revision exists; it has current valid customer confirmation evidence; and it contains a non-empty customer name and a supported preferred locale. | Telephone, any address, tenant access or Request eligibility. |
 | **Eligible to create a Request** | Only the Service Requests owner returns an authoritative eligibility result from its own contract. | Profile completeness, address count or customer directory presence. |
 
 `Customer name` may be a single confirmed display/name value; this policy does
@@ -69,7 +72,7 @@ them universally.
 `profileOperationalCompleteness` is exactly one of:
 
 - **complete:** every Profile operational completeness input above is present
-  and customer-confirmed;
+  and belongs to a current customer-confirmed revision;
 - **incomplete:** Profile is absent, or at least one required confirmation input
   is absent/unconfirmed;
 - **unknown:** the source cannot safely determine complete/incomplete.

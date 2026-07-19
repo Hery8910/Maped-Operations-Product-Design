@@ -6,7 +6,8 @@
 `../internal-notes/DOMAIN.md`, `PROFILE_CONTRACT.md`,
 `RELATIONSHIP_LIFECYCLE_CONTRACT.md`,
 `READ_PROJECTION_AUTHORIZATION_CONTRACT.md`, `SUMMARY_CONTRACT.md`,
-`DIRECTORY_QUERY_CONTRACT.md` and
+`DIRECTORY_QUERY_CONTRACT.md`,
+`CUSTOMER_PROFILE_CONFIRMATION_CONTRACT.md` and
 `../invitations/CUSTOMER_ACCESS_LIFECYCLE_CONTRACT.md`.
 
 ## Directory and summary states
@@ -60,7 +61,7 @@ required: no approved tenant-admin Customers action resolves them.
 
 | Surface | Availability state |
 | --- | --- |
-| Overview | Profile data loading, ready, unavailable/retry, restricted or stale; display `complete`/`incomplete`/`unknown` informationally |
+| Overview | Profile data loading, ready, unavailable/retry, restricted or stale; display confirmation result (`absent`/`unconfirmed`/`confirmed`/`unknown`) and `complete`/`incomplete`/`unknown` informationally |
 | Requests | Hidden when module disabled; otherwise loading, ready, true empty, error/retry, loading more/end |
 | Work orders | Hidden when module disabled; otherwise loading, ready, true empty, error/retry, loading more/end |
 | Notes | Loading, ready, true empty, error/retry; create/edit/archive each idle, pending, success or error |
@@ -85,6 +86,6 @@ for this tenant and do not substitute a zero result.
 | Resend / renew / revoke | authorized tenant admin/super admin | invitation lifecycle only |
 | Open Request / Work Order | authorized viewer | navigates to owning domain, subject to that domain authorization |
 | Create, edit, archive internal note | authorized tenant admin/super admin | internal note capability only |
-| Edit confirmed Profile | nobody in Customers | excluded; customer Profile flow owns it |
+| Edit or confirm Profile | nobody in Customers | excluded; customer Profile review/correct/save flow owns it |
 | Edit global email / credentials / tenant access | nobody in Customers | Identity/Auth or authorized tenant-access owner owns it |
 | Archive / remove / reactivate Customer relationship | nobody in Customers | excluded until a separate authorized lifecycle job is defined |

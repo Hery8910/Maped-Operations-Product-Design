@@ -10,6 +10,8 @@ domains.
 `INTEGRATION_CONTRACT.md`, `BACKEND_HANDOFF.md`, `FRONTEND_HANDOFF.md`,
 `IMPLEMENTATION_PLAN.md`, `VALIDATION_CHECKLIST.md`; `../invitations/DOMAIN.md`
 and `../internal-notes/DOMAIN.md`; `PROFILE_CONTRACT.md`,
+`CUSTOMER_PROFILE_CONFIRMATION_CONTRACT.md`,
+`CUSTOMER_PROFILE_CONFIRMATION_GATE.md`,
 `RELATIONSHIP_LIFECYCLE_CONTRACT.md`,
 `READ_PROJECTION_AUTHORIZATION_CONTRACT.md`, `SUMMARY_CONTRACT.md`,
 `DIRECTORY_QUERY_CONTRACT.md`, `CUSTOMERS_V1_CONVERGENCE_PLAN.md` and
@@ -156,10 +158,11 @@ Action required and reconciliation, are canonical in
 
 ## Closed product gate and open implementation gates
 
-The Customer ↔ Profile ownership and completeness policy is closed in
-`PROFILE_CONTRACT.md`: Profile incomplete is deterministic and informational,
-not Action required. Its backend/frontend authorization, source, confirmation
-and freshness mapping remains open; this does not make a Customers slice
+The Customer ↔ Profile ownership/completeness policy is closed in
+`PROFILE_CONTRACT.md`. Provenance, confirmation evidence, invalidation and
+legacy classification are canonical in `CUSTOMER_PROFILE_CONFIRMATION_CONTRACT.md`;
+Profile incomplete is deterministic and informational, not Action required.
+Their runtime mapping remains open; this does not make a Customers slice
 implementation-ready.
 
 The Customer relationship lifecycle, directory inclusion, tenant-access and

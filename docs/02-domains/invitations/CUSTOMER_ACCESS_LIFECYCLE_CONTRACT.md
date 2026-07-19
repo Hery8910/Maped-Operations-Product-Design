@@ -9,7 +9,8 @@ meaning, recovery and reconciliation with Customers.
 `../customers/DOMAIN.md`, `../customers/RELATIONSHIP_LIFECYCLE_CONTRACT.md`,
 `../customers/READ_PROJECTION_AUTHORIZATION_CONTRACT.md`,
 `../customers/SUMMARY_CONTRACT.md` and
-`../customers/DIRECTORY_QUERY_CONTRACT.md`.
+`../customers/DIRECTORY_QUERY_CONTRACT.md` and
+`../customers/CUSTOMER_PROFILE_CONFIRMATION_CONTRACT.md`.
 
 ## Boundary
 
@@ -40,8 +41,9 @@ Acceptance authenticates or associates a global identity as needed, then
 reconciles exactly one operational Customer relationship. That relationship can
 appear in **Customers** immediately after authoritative reconciliation; it does
 not wait for Profile creation or Profile confirmation. The customer must
-review/correct/save the proposal in the customer-owned Profile flow before name
-or locale becomes confirmed Profile data. If reconciliation cannot be safely
+review/correct/save the proposal in the customer-owned Profile flow before a
+current Profile revision can be confirmed under
+`../customers/CUSTOMER_PROFILE_CONFIRMATION_CONTRACT.md`. If reconciliation cannot be safely
 established, accepted Invitation and Customer are not shown as duplicate normal
 rows; the context is `unknown`/`unavailable` until the owner resolves it.
 
@@ -133,7 +135,8 @@ endpoint, response and message design remain integration work.
 - Creation/delivery creates no Customer row; current lifecycle creates an
   Invitation row in the Invitations composition.
 - Acceptance creates or reconciles exactly one operational Customer relationship
-  but proves neither Profile completion, tenant access nor Request eligibility.
+  but proves neither Profile confirmation/completion, tenant access nor Request
+  eligibility.
 - Accepted/revoked Invitations leave normal Invitation and Action-required
   populations. Selected accepted Invitation becomes Customer only with an
   authoritative relationship reference; otherwise selection returns safely.

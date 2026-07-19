@@ -18,8 +18,10 @@ modal. Right detail supports Customer, Invitation and Invite states.
   required.
 - Customer: Overview, Requests, Work orders, Notes; hide owner sections when
   their tenant module is disabled.
-- Overview: current email projection, Profile, all addresses and deterministic
-  `complete`/`incomplete`/`unknown` completeness with reasons; read-only.
+- Overview: current email projection, Profile confirmation result and
+  deterministic `complete`/`incomplete`/`unknown` completeness with reasons;
+  read-only. Do not infer `confirmed` from displayed values; use
+  `CUSTOMER_PROFILE_CONFIRMATION_CONTRACT.md` outcomes.
 - Requests/Work Orders: compact paginated read projections and navigation only.
 - Notes: internal create/list/edit/archive only when the contract permits.
 - Normal Customers directory/count/search include operational relationships
