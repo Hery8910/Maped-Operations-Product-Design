@@ -1171,3 +1171,51 @@ Invitation command. It leaves all technical mapping and runtime work open.
 A demonstrated administrator job requires another population view, relevance
 ordering or a search behavior that remains deterministic, authorized and
 cursor-safe.
+
+---
+
+## D-032 — Make Customers the canonical product surface and separate Action required from attention
+
+- **Status:** Accepted
+- **Documented:** 2026-07-19
+- **Scope:** Customers route, customer-access Invitation recovery and legacy
+  Users/Tenant Users vocabulary
+
+**Context**
+
+Backend and frontend readiness audits show useful legacy directory mechanics but
+also mix account/access state, Profile materialization, delivery, attention,
+Requests activity and global identity. The legacy `/people/users` name and
+clickable V2 summary/filter conventions would make that technical surface appear
+to define the Customer product.
+
+**Decision**
+
+Customers is the tenant-scoped operational relationship and `/people/customers`
+is its canonical future route. `/people/users` is a temporary redirect only.
+Customer-access Invitations have exclusive semantic lifecycle
+`pending|delivery_failed|expired|accepted|revoked`; delivery failure is a
+persisted Invitation condition distinct from a pre-persistence failure. Action
+required contains only currently recoverable `delivery_failed` or `expired`
+customer-access Invitations, never legacy attention, security/account state or
+Profile incompleteness. Proposal name/email/language remains unconfirmed until
+the customer review/correct/save flow confirms Profile data.
+
+**Rationale**
+
+This preserves the global identity boundary, gives tenant admins a calculable
+recovery queue and allows implementation to reuse mechanics without inheriting
+legacy product semantics.
+
+**Consequences and trade-offs**
+
+Implementation must map lifecycle/access separately, persist delivery failure,
+make recovery eligibility current, keep summary cards informative and migrate
+one route without global-ID lookup. The convergence plan authorizes only its
+small authorization/lifecycle runtime unit first; it does not authorize an
+Invitation UI, endpoint/schema, provider, migration or Profile CRUD.
+
+**Revisit when**
+
+A demonstrated tenant-admin recovery job requires another invitation condition
+or a distinct product route that remains tenant-scoped and non-duplicative.

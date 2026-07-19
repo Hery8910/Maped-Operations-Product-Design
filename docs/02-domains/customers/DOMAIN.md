@@ -12,7 +12,8 @@ domains.
 and `../internal-notes/DOMAIN.md`; `PROFILE_CONTRACT.md`,
 `RELATIONSHIP_LIFECYCLE_CONTRACT.md`,
 `READ_PROJECTION_AUTHORIZATION_CONTRACT.md`, `SUMMARY_CONTRACT.md`,
-`DIRECTORY_QUERY_CONTRACT.md`.
+`DIRECTORY_QUERY_CONTRACT.md`, `CUSTOMERS_V1_CONVERGENCE_PLAN.md` and
+`../invitations/CUSTOMER_ACCESS_LIFECYCLE_CONTRACT.md`.
 
 ## Purpose
 
@@ -137,7 +138,9 @@ and addresses are not requested from the tenant admin. The name is a proposal;
 the customer reviews/corrects it and completes their data. No confirmed existing
 Profile value is silently overwritten. The common Invitations capability owns
 delivery, token, expiry, resend, renew-and-resend, cooldown, revoke, acceptance
-and audit lifecycle.
+and audit lifecycle. Its customer-access semantics, including delivery failure,
+Action required and reconciliation, are canonical in
+`../invitations/CUSTOMER_ACCESS_LIFECYCLE_CONTRACT.md`.
 
 ## Explicit exclusions
 
@@ -175,6 +178,9 @@ search and filter implementation remain open.
 Directory query, search, filter, cursor, ordering, selection and reconciliation
 product semantics are closed in `DIRECTORY_QUERY_CONTRACT.md`; technical cursor/
 search/filter mapping and enforcement remain open.
+
+The authoritative cross-repository order, route migration decision and first
+runtime boundary are in `CUSTOMERS_V1_CONVERGENCE_PLAN.md`.
 
 Remaining gates:
 

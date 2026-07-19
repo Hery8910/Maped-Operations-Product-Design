@@ -6,7 +6,8 @@
 `../internal-notes/DOMAIN.md`, `PROFILE_CONTRACT.md`,
 `RELATIONSHIP_LIFECYCLE_CONTRACT.md`,
 `READ_PROJECTION_AUTHORIZATION_CONTRACT.md`, `SUMMARY_CONTRACT.md`,
-`DIRECTORY_QUERY_CONTRACT.md`.
+`DIRECTORY_QUERY_CONTRACT.md` and
+`../invitations/CUSTOMER_ACCESS_LIFECYCLE_CONTRACT.md`.
 
 ## Directory and summary states
 
@@ -43,10 +44,13 @@ restricted and unavailable.
 | Invitation — accepted | reconciliation evidence | Reconcile into Customer relationship; no duplicate operational row |
 | Invitation — revoked | acceptance capability invalidated | Remove from normal directory |
 
-`Action required` includes only delivery failed and expired because each has a
-legitimate tenant-admin recovery action. `profileOperationalCompleteness` is
-`complete`, `incomplete` or `unknown`; incomplete/unknown are informational and
-never Action required. It is not a generic severity label.
+`Action required` includes only delivery failed and expired when Invitations
+currently confirms a legitimate tenant-admin recovery. Its canonical reason,
+recovery and unknown/unavailable rules are in
+`../invitations/CUSTOMER_ACCESS_LIFECYCLE_CONTRACT.md`.
+`profileOperationalCompleteness` is `complete`, `incomplete` or `unknown`;
+incomplete/unknown are informational and never Action required. It is not a
+generic severity label.
 
 Operational Customers with restricted/unknown access, archived/removed Customers,
 tenant suspension and global Identity/Auth restriction are likewise not Action

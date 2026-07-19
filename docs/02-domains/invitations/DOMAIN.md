@@ -3,6 +3,10 @@
 **Status:** DEFINED — reusable capability; contract verification pending.  
 **Authority:** Invitation lifecycle, delivery and acceptance boundary.
 
+For `customer_access`, the canonical lifecycle, delivery, recovery and Action
+required boundary is `CUSTOMER_ACCESS_LIFECYCLE_CONTRACT.md`. This document
+keeps the shared capability boundary and does not duplicate that contract.
+
 ## Purpose and boundary
 
 Invitations is a tenant-scoped shared capability for `customer_access`,

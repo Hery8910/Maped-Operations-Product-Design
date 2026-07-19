@@ -57,6 +57,9 @@ context.
 Use `DIRECTORY_QUERY_CONTRACT.md` for query normalization, cursor-chain reset,
 empty/error distinction, direct selection and reconciliation; do not preserve
 pages/detail after authorization change or call a cursor mismatch an empty list.
+Use `../invitations/CUSTOMER_ACCESS_LIFECYCLE_CONTRACT.md` for customer-access
+Invitation labels, Action required, recovery and proposal/confirmation meaning;
+do not surface delivery diagnostics, telephone proposal or legacy attention.
 
 ## Accessibility and branding
 

@@ -39,6 +39,11 @@ filter/query/order cursor chains; protect cursor mismatch/expiry; guarantee no
 duplicate/omitted entry within coherent review; preserve prior pages on load-more
 failure; and never treat a mismatch as empty.
 
+Customer-access Invitation and Action required policy is fixed in
+`../invitations/CUSTOMER_ACCESS_LIFECYCLE_CONTRACT.md`: map lifecycle separately
+from delivery outcome, persist delivery failure, expose only current recovery
+eligibility and reconcile acceptance without duplicate normal rows.
+
 ## Required capabilities
 
 - Authorized cursor directory query with name/email/telephone search and the

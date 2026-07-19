@@ -26,6 +26,9 @@ shape, field-level minimization, freshness and non-disclosing outcome taxonomy.
 consistency and per-counter states; it does not define transport or queries.
 `DIRECTORY_QUERY_CONTRACT.md` fixes query populations, search semantics, order,
 cursor, selection and reconciliation; it does not define endpoint or encoding.
+`../invitations/CUSTOMER_ACCESS_LIFECYCLE_CONTRACT.md` fixes customer-access
+Invitation lifecycle, delivery failure, recovery and Action required; it does
+not define command or token transport.
 
 ## Required read contracts
 

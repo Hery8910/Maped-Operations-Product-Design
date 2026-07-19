@@ -2,6 +2,10 @@
 
 **Status:** PLANNED — contract gates open.
 
+`CUSTOMER_ACCESS_LIFECYCLE_CONTRACT.md` fixes product semantics for the
+customer-access variant. Backend/frontend must map it without treating legacy
+Tenant Users delivery, attention or Profile materialization as authority.
+
 Backend must provide tenant-scoped invitation identity/projection, kind,
 recipient/proposal fields, opaque non-PII credential, expiry, delivery result,
 cooldown eligibility, lifecycle/audit and semantic outcomes. Commands support
