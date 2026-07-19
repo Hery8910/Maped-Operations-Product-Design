@@ -28,6 +28,9 @@ modal. Right detail supports Customer, Invitation and Invite states.
 - Customer rows exclude telephone, locale, addresses and owner-domain context.
   Overview loads identity, Profile/contact, addresses and access context as
   independently visible blocks only after tenant authorization succeeds.
+- Summaries are tenant-wide, independent from cursor/search/filter/selection and
+  can load/fail/retry independently. Do not render unavailable/unknown as zero
+  or present invalid counter combinations as ready.
 
 ## State, URL and responsive behavior
 
@@ -45,6 +48,9 @@ contract mapping is verified; otherwise use unknown/unavailable safely.
 Do not expose raw global-security reasons, global IDs, tokens or source errors;
 use the stable read taxonomy and opacity rules in
 `READ_PROJECTION_AUTHORIZATION_CONTRACT.md`.
+Use `SUMMARY_CONTRACT.md` for exact-zero, refreshing/stale, retry and
+cross-counter degradation behavior; retrying a counter preserves directory
+context.
 
 ## Accessibility and branding
 

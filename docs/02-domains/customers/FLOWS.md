@@ -20,6 +20,9 @@ result does not remove a known relationship or create Action required.
 If primary tenant authorization fails, the flow returns an opaque denial rather
 than a partial row/detail; independently unavailable Profile blocks can be
 partial only after authorized relationship context is established.
+Summary counters are tenant-wide and do not change when searching, filtering,
+selecting or loading more. A counter may retry/refresh without resetting the
+directory task; zero appears only after authoritative empty evaluation.
 
 ## 2. Search, filter, paginate and select
 

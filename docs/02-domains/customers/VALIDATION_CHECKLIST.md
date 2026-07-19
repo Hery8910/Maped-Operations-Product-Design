@@ -21,6 +21,9 @@
 - [ ] Profile result is exactly complete, incomplete or unknown. Complete requires
   customer-confirmed name and supported locale; phone/address/email are excluded
   inputs. Incomplete/unknown do not create Action required.
+- [ ] Four tenant-wide counters follow their exact approved populations, never
+  use cursor rows/search/filter state, distinguish zero from unknown/unavailable
+  and never render Profiles complete greater than Customers as ready.
 
 ## Directory, detail and related work
 
@@ -35,6 +38,9 @@
 - [ ] Overview allows partial Profile/address blocks only after current primary
   authorization. Lifecycle/access/security/tenant context and addresses obey
   the documented never-stale rules.
+- [ ] Each summary can load, refresh, retain permitted stale value, retry or fail
+  independently without resetting directory context; primary denial removes all
+  counters and no counter partial leaks.
 - [ ] Requests/Work Orders are hidden when disabled and otherwise offer only
   authorized paginated read projection plus owner-domain navigation.
 - [ ] Note list/create/edit/archive behavior satisfies internal-only access,

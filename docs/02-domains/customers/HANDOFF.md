@@ -17,5 +17,6 @@ the [Customer ↔ Profile contract](PROFILE_CONTRACT.md) and owner-domain
 contracts for Service Requests and Work Orders when they are defined, plus the
 [relationship lifecycle contract](RELATIONSHIP_LIFECYCLE_CONTRACT.md). This
 package also requires the [read projection and authorization contract](READ_PROJECTION_AUTHORIZATION_CONTRACT.md).
-It does not authorize implementation until the gates in
+It also requires the [summary populations contract](SUMMARY_CONTRACT.md). It
+does not authorize implementation until the gates in
 `IMPLEMENTATION_PLAN.md` are verified.

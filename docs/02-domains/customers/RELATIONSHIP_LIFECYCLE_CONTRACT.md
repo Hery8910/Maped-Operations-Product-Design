@@ -25,6 +25,8 @@ Tenant lifecycle                 ── owns whether the tenant can currently se
 Read authorization, minimal access/global/tenant meaning and stale behavior are
 defined in `READ_PROJECTION_AUTHORIZATION_CONTRACT.md`; a relationship lifecycle
 or access result must not be exposed when its primary tenant scope is forbidden.
+`SUMMARY_CONTRACT.md` counts only authoritative `operational` relationships and
+degrades instead of undercounting when lifecycle classification is unsafe.
 
 ## Relationship lifecycle
 

@@ -136,6 +136,8 @@ safety and tenant lifecycle availability are distinct. A tenant becoming
 unavailable must not silently archive or remove its Customer relationships.
 Customers exposes these only through least-necessary authorized tenant
 projections; no Customer surface may become a global identity lookup.
+Its tenant-wide summaries are independent operational populations, never totals
+derived from a loaded directory page or combined into one People total.
 
 ### 3. Invitations
 

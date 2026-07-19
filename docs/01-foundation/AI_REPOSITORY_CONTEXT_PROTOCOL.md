@@ -148,6 +148,10 @@ and read-projection authorization contracts. Treat primary tenant authorization
 as the boundary before field/source analysis; audits cannot justify a global
 identity lookup or partial response after denial.
 
+For Customers summary work, also load `SUMMARY_CONTRACT.md`. Do not infer a
+tenant-wide population from cursor rows or use a zero to conceal an unknown,
+restricted or unavailable authoritative source.
+
 ### E. Frontend Implementation Task
 
 Load:

@@ -111,3 +111,7 @@ Verified evidence: `protectClient` limits ordinary tenant access; Auth email is 
 Partial evidence: technical super-admin bypass exists without approved support-read policy; Profile is holder-private while this contract requires least-necessary admin projection; refresh is manually/eventually consistent; current directory includes request/activity/next-visit data outside this contract.
 
 Incompatibilities/risks: `UserClient.inactive` is ambiguous; acceptance materializes Profile proposal; existing directory/attention can expose more than approved; evidence does not prove field-level opaque denial or equally non-disclosing cross-tenant not-found/forbidden behavior. No runtime change is authorized.
+
+`SUMMARY_CONTRACT.md` defines tenant-wide counters separately. They share this
+contract's primary authorization/opaque-denial boundary but are not row-derived
+fields and cannot be inferred from a cursor page.

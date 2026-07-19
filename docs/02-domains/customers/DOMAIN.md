@@ -11,7 +11,7 @@ domains.
 `IMPLEMENTATION_PLAN.md`, `VALIDATION_CHECKLIST.md`; `../invitations/DOMAIN.md`
 and `../internal-notes/DOMAIN.md`; `PROFILE_CONTRACT.md`,
 `RELATIONSHIP_LIFECYCLE_CONTRACT.md`,
-`READ_PROJECTION_AUTHORIZATION_CONTRACT.md`.
+`READ_PROJECTION_AUTHORIZATION_CONTRACT.md`, `SUMMARY_CONTRACT.md`.
 
 ## Purpose
 
@@ -101,6 +101,8 @@ derived from the loaded cursor page:
 unknown Profiles, missing phone/address and absence of Requests or Work Orders:
 none is currently an administrator action in this surface. The exact Profile
 result and reason rules are in `PROFILE_CONTRACT.md`.
+Population, exactness, freshness and invalidation rules for all four counters
+are in `SUMMARY_CONTRACT.md`; summaries never derive from the loaded directory.
 
 ### Customer detail
 
@@ -161,6 +163,10 @@ and authorization projections remains open and does not make a slice ready.
 The Customers read projection, field authorization, freshness and opaque-denial
 policy is closed in `READ_PROJECTION_AUTHORIZATION_CONTRACT.md`; backend/frontend
 mapping and enforcement verification remain open.
+
+The four Customers summary populations, consistency and freshness policy is
+closed in `SUMMARY_CONTRACT.md`; calculation/transport enforcement, cursor,
+search and filter implementation remain open.
 
 Remaining gates:
 

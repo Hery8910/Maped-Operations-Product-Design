@@ -22,13 +22,15 @@ mapping and must return an appropriate unknown access result until verified.
 
 `READ_PROJECTION_AUTHORIZATION_CONTRACT.md` fixes the minimum authorized read
 shape, field-level minimization, freshness and non-disclosing outcome taxonomy.
+`SUMMARY_CONTRACT.md` fixes the four tenant-wide populations and their exactness,
+consistency and per-counter states; it does not define transport or queries.
 
 ## Required read contracts
 
 | Need | Required semantics | Gate |
 | --- | --- | --- |
 | Directory | tenant-scoped minimized Customer row plus separate Invitation row; authorized name/email search and telephone matching; no address/owner-domain data | cursor ordering, field projection, freshness and authorization verification |
-| Summary | tenant-wide Customers, Profiles complete (`complete` only), pending invitations and action-required counts; independent freshness/loading/error | exact population and Profile result mapping/freshness |
+| Summary | four tenant-wide populations with independent counter states, no cursor-derived calculation and coherent invariant review | calculation/transport, authoritative lifecycle/profile/invitation mappings and freshness enforcement |
 | Customer Overview | current email projection, confirmed Profile, all confirmed addresses and `complete`/`incomplete`/`unknown` result with deterministic reasons; source/fallback/freshness per field | authorized Profile read projection and confirmation/freshness mapping |
 | Invitation detail | lifecycle state, delivery meaning and permitted action availability | Invitations lifecycle projection |
 | Related Requests / Work Orders | per-customer tenant-scoped cursor query, compact read-only fields, total and owner-page destination | each owner domain's query, authorization and destination |
@@ -41,6 +43,9 @@ reveal partial tenant data.
 Overview loads relationship envelope, contact/Profile, addresses and access
 context as separate blocks; only Profile/address blocks may be partial after a
 current authorization envelope succeeds.
+Summaries require primary authorization before any counter; no counter is
+returned after a primary denial, and impossible independent combinations degrade
+rather than render ready.
 
 ## Required command/outcome contracts
 
@@ -95,8 +100,11 @@ whether archive is reversible; these remain gates until verified.
    redaction, independent Overview blocks, freshness/invalidation and opaque
    `not found`/`forbidden` behavior. This does not close cursor, search or
    summaries.
-7. Verify Invitations lifecycle, cooldown, delivery outcome identity, audit and
+7. **Product gate closed:** map all four populations, exact/zero/unknown/
+   unavailable behavior, invalidation and coherent review point. This does not
+   close summaries transport, cursor, search or filters.
+8. Verify Invitations lifecycle, cooldown, delivery outcome identity, audit and
    reconciliation.
-8. Verify owner-domain read projections and pagination for Requests/Work Orders.
-9. Verify Internal Notes authorization, retention/archive semantics, authorship
+9. Verify owner-domain read projections and pagination for Requests/Work Orders.
+10. Verify Internal Notes authorization, retention/archive semantics, authorship
    and audit expectations.

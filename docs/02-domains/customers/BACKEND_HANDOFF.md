@@ -28,6 +28,12 @@ before resolving any source; return minimized separate Customer/Invitation rows;
 allow partial only after a current authorized relationship envelope; and make
 cross-tenant/not-authorized responses non-disclosing.
 
+The summary policy is fixed in `SUMMARY_CONTRACT.md`: evaluate the four whole
+tenant populations only after primary authorization, distinguish authoritative
+zero from unknown/unavailable, and provide a coherent review point or safe
+degradation for cross-counter invariants. Do not derive a summary from cursor
+rows or expose it after primary denial.
+
 ## Required capabilities
 
 - Authorized cursor directory query with name/email/telephone search and the
@@ -40,6 +46,8 @@ cross-tenant/not-authorized responses non-disclosing.
   independently fresh only where policy allows.
 - Tenant-wide summary query with defined population/freshness for all four
   counters.
+- Independent counter result/freshness/invalidation semantics and a safe way to
+  detect/degrade impossible population combinations.
 - Stable detail queries for customer, invitation, Profile/addresses and enabled
   related read projections.
 - A least-necessary tenant-admin Profile read projection: current approved email,
@@ -72,3 +80,7 @@ removal, tenant suspension, invitation or Profile status.
 Verify whether existing `protectClient`, super-admin bypass, derived directory
 projection and source reads meet opaque denial, least-data and freshness rules;
 existing behavior is evidence, not an approved contract mapping.
+Audit current summary source, operational/inactive mapping, Profile-complete
+aggregation, invitation state/action population, cross-tenant denial and
+projection consistency. Do not convert legacy attention or active/inactive
+counts into approved Customers summaries.

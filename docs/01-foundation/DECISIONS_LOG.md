@@ -1080,3 +1080,44 @@ lifecycle decision is created.
 
 Another validated actor has a distinct Customers operational job, or a field
 proves necessary for the row rather than authorized detail context.
+
+---
+
+## D-030 — Define Customers summaries as independent exact tenant populations
+
+- **Status:** Accepted
+- **Documented:** 2026-07-19
+- **Scope:** Customers summaries, consistency and freshness
+
+**Context**
+
+The existing directory evidence has a separate summary source, but historical
+active/inactive/attention semantics do not define the new Customers populations.
+Summing loaded rows or treating unavailable source data as zero would undercount
+or expose misleading operational meaning.
+
+**Decision**
+
+Customers, Profiles complete, Pending invitations and Action required are four
+independent tenant-wide populations evaluated after primary authorization.
+Customers counts only operational relationships; Profiles complete is its
+authoritatively classifiable complete subset; invitation counters are current
+customer-access lifecycle populations and are disjoint when lifecycle is
+exclusive. Counters do not respond to cursor/search/filter/selection. Unknown,
+restricted or unavailable source never becomes a lower exact number or zero.
+
+**Rationale**
+
+This makes summary feedback operationally truthful while allowing independent
+loading and failure without discarding an authorized directory context.
+
+**Consequences and trade-offs**
+
+Implementation needs a coherent review point or safe degradation for impossible
+combinations. This does not choose queries, cursor, cache/event technology,
+invitation commands or summary UI layout.
+
+**Revisit when**
+
+A new approved tenant-wide operational counter passes the Product Necessity Gate
+and can state its population, owner, authorization and exactness rules.

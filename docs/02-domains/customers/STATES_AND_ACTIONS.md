@@ -5,7 +5,7 @@
 **Related:** `DOMAIN.md`, `FLOWS.md`, `../invitations/DOMAIN.md`,
 `../internal-notes/DOMAIN.md`, `PROFILE_CONTRACT.md`,
 `RELATIONSHIP_LIFECYCLE_CONTRACT.md`,
-`READ_PROJECTION_AUTHORIZATION_CONTRACT.md`.
+`READ_PROJECTION_AUTHORIZATION_CONTRACT.md`, `SUMMARY_CONTRACT.md`.
 
 ## Directory and summary states
 
@@ -14,6 +14,10 @@ with retained usable content**, **ready**, **true empty**, **no search results**
 **no filter results**, **error with retry**, **loading more**, and **end**.
 Summary counters independently distinguish loading, ready, zero and error; zero
 never stands in for unavailable data.
+
+Each counter also independently distinguishes refreshing/stale retained value,
+restricted and unknown. An impossible combination such as Profiles complete
+greater than Customers is never ready; affected counters refresh or degrade.
 
 The selected detail independently distinguishes loading, ready, error and stale
 or unavailable selection without discarding the directory context. Search,

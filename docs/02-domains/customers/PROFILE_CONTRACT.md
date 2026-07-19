@@ -85,6 +85,10 @@ Customers action to correct confirmed Profile data; presenting it as an action
 queue would be misleading. Delivery failure and expiry remain the only current
 Action-required reasons.
 
+`SUMMARY_CONTRACT.md` requires this counter to become unknown, restricted or
+unavailable rather than undercount when an operational Customer cannot be
+authoritatively classified.
+
 ## Information and modification boundary
 
 Tenant admins receive a least-necessary, tenant-scoped read projection of the

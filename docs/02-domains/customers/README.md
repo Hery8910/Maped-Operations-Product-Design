@@ -8,6 +8,7 @@ separate reusable capabilities, integrated here through their contracts.
 - [Customer ↔ Profile contract](PROFILE_CONTRACT.md)
 - [Relationship lifecycle contract](RELATIONSHIP_LIFECYCLE_CONTRACT.md)
 - [Read projection and authorization contract](READ_PROJECTION_AUTHORIZATION_CONTRACT.md)
+- [Summary populations and freshness contract](SUMMARY_CONTRACT.md)
 - [Product notes](PRODUCT_NOTES.md)
 - [Integration contract](INTEGRATION_CONTRACT.md)
 - [Implementation handoff](HANDOFF.md)
