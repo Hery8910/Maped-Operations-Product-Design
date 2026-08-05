@@ -17,6 +17,8 @@ The flow allows the customer to either:
 1. accept the company proposal; or
 2. return only to the Visit-date selection step and submit another available preference.
 
+The second outcome does not end the scenario. It returns responsibility to the company and may begin another date-negotiation round.
+
 The customer does not repeat the complete Service Request.
 
 ## 2. Relationship with other scenarios
@@ -201,16 +203,86 @@ The customer selects a new date and slot and submits it as a **new preference**,
 On successful submission:
 
 - the previous proposal reservation is released;
-- the new preference is appended to history;
+- the previous proposal remains preserved in history;
+- the new preference is appended to history and becomes the current customer preference for review;
 - the Service Request returns to **In review**;
+- responsibility returns to the company;
 - the company is notified;
 - no Visit is created automatically under this version of the flow.
 
-The company may then create Visit, send another proposal or resolve another operational issue.
+The company may then:
+
+- accept the exact new preference and create Visit after final revalidation;
+- determine that it cannot confirm the preference and send another company proposal;
+- resolve another operational issue;
+- cancel or close the request through an approved flow.
 
 Automatic confirmation of a customer-selected alternative may be reconsidered only after Scheduling reliability and authorization behavior are explicitly validated.
 
-## 12. Expiration behavior
+## 12. Repeatable date-negotiation cycle
+
+Date negotiation is a repeatable sequence, not a one-time alternative branch.
+
+```text
+Company proposes a date
+→ customer reviews the proposal
+    → accepts the exact proposal
+        → final availability revalidation
+        → Visit is created and linked
+    → or chooses another available date
+        → new customer preference is recorded
+        → Service Request returns to In review
+        → company reviews the new preference
+            → accepts it and creates Visit
+            → or sends another company proposal
+                → a new customer-decision round begins
+```
+
+Each round is an immutable historical unit. It preserves:
+
+- the customer preference that existed when the round began;
+- the company's proposed date;
+- the administrator who created the proposal;
+- the reservation deadline;
+- the customer decision;
+- creation and response times;
+- the round outcome, such as accepted, replaced, expired, withdrawn or answered with another preference.
+
+A previous round is not edited to represent the next one.
+
+At any moment:
+
+- only one company date proposal may be active for the Service Request;
+- only one compatible temporary reservation may be associated with that active proposal;
+- sending a replacement proposal invalidates the previous active proposal and releases its reservation;
+- all prior preferences and proposals remain visible in history;
+- the customer sees the current actionable round, not a mutable reconstruction of earlier communication.
+
+A new company proposal creates a new secure customer-action context. A previous consumed, replaced, withdrawn or expired proposal must not become active again through silent editing.
+
+The cycle may repeat until one of the following controlled outcomes occurs:
+
+1. Visit is created and linked successfully;
+2. the Service Request is cancelled through an approved cancellation flow;
+3. the Service Request is closed through another explicitly defined product outcome.
+
+The product must not impose an arbitrary number of rounds in this document. Whether later evidence justifies reminders, escalation, inactivity handling or a tenant-configurable operational limit remains separate analysis.
+
+### 12.1 Availability question deferred to Scheduling
+
+This document does not decide whether a new date selected by the customer receives a short temporary hold while the company reviews it.
+
+That decision must be analyzed with Scheduling because it affects:
+
+- whether the same slot may be offered elsewhere before company review;
+- how long a customer-selected preference could be held;
+- whether such a hold competes with company-authorized proposals;
+- stale availability and concurrent selections;
+- release and conflict behavior.
+
+Until that analysis is approved, a customer-selected alternative is a preference requiring company review, not a confirmed Visit and not automatically equivalent to the temporary reservation created by a company proposal.
+
+## 13. Expiration behavior
 
 When the effective reservation deadline is reached without acceptance:
 
@@ -227,7 +299,7 @@ No automatic expiration email is required for the initial version because the or
 
 A configurable reminder before expiration remains deferred Communication-domain work.
 
-## 13. Secure-link validity
+## 14. Secure-link validity
 
 The secure response link and the slot reservation have separate lifetimes.
 
@@ -235,7 +307,7 @@ The response link follows the product rule established for customer-action links
 
 The slot may expire earlier while the link continues to open the page and offer another date.
 
-## 14. Concurrent or last-moment acceptance
+## 15. Concurrent or last-moment acceptance
 
 The platform must revalidate at acceptance time.
 
@@ -245,7 +317,7 @@ The customer receives an understandable explanation and can choose another avail
 
 This document establishes product behavior but does not prescribe transaction, locking or persistence architecture.
 
-## 15. Withdrawal and replacement
+## 16. Withdrawal and replacement
 
 A sent proposal is not edited silently.
 
@@ -263,7 +335,7 @@ Withdrawal or replacement:
 
 Internal notes do not alter customer-facing proposals.
 
-## 16. Configuration boundary
+## 17. Configuration boundary
 
 The following are legitimate tenant configuration candidates:
 
@@ -282,7 +354,7 @@ Configuration must not permit:
 
 Exact configuration scopes, defaults, allowed ranges and precedence belong to the later Scheduling analysis.
 
-## 17. Required feedback moments
+## 18. Required feedback moments
 
 The flow requires understandable feedback for:
 
@@ -294,30 +366,33 @@ The flow requires understandable feedback for:
 6. proposal expired;
 7. alternative date selection;
 8. new preference submission;
-9. last-moment availability conflict.
+9. return of responsibility to the company;
+10. creation of another negotiation round;
+11. last-moment availability conflict.
 
 Detailed visual controls remain deferred to interaction design and Figma.
 
-## 18. Deferred decisions
+## 19. Deferred decisions
 
 The following remain intentionally deferred:
 
 - Scheduling availability algorithm;
+- whether and how a customer-selected preference receives a temporary hold;
 - allowed minimum/maximum reservation durations;
 - whether configuration is company-wide or service-specific;
 - exact minimum lead-time defaults and limits;
 - slot granularity and Visit duration mapping;
 - travel, buffer and multi-worker rules;
-- reminder email policy;
+- reminder, escalation and inactivity policy;
 - exact calendar responsive behavior;
 - technical concurrency, transactions and persistence;
 - Figma representation and reusable component extraction.
 
-## 19. Downstream sequence
+## 20. Downstream sequence
 
 After all Service Request scenarios are reviewed:
 
-1. analyze Scheduling and calendar rules separately;
+1. analyze Scheduling and calendar rules separately, including customer-selected preference holds;
 2. create the Service Requests screen/state inventory;
 3. represent approved flows in Figma;
 4. validate responsive and accessibility behavior;
